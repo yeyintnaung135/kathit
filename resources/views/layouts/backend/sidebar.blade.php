@@ -88,31 +88,6 @@
                 </ul>
 
               </li>
-              <li class="nav-item d-none">
-                  <a href="#" class="nav-link">
-                      <i class="nav-icon fas fa-th"></i>
-                      <p>
-                          Categories
-                          <i class="fas fa-angle-left right"></i>
-                      </p>
-                  </a>
-                  <ul class="nav nav-treeview">
-                      <li class="nav-item">
-                          <a href="{{url('backend/categories/list')}}" class="nav-link">
-                              <i class="far fa-circle nav-icon"></i>
-                              <p>List</p>
-                          </a>
-                      </li>
-                      <li class="nav-item">
-                          <a href="{{url('backend/categories/add')}}" class="nav-link">
-                              <i class="far fa-circle nav-icon"></i>
-                              <p>Add New</p>
-                          </a>
-                      </li>
-
-                  </ul>
-
-              </li>
               <li class="nav-item">
                   <a href="#" class="nav-link">
                       <i class="nav-icon fas fa-th"></i>
@@ -143,6 +118,40 @@
 
                   </ul>
 
+              </li>
+
+              <li class="nav-item">
+                  <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-th"></i>
+                      <p>
+                          Videos
+                          <i class="fas fa-angle-left right"></i>
+                      </p>
+                  </a>
+                  <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                          <a href="{{url('backend/video/list')}}" class="nav-link">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>List</p>
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a href="{{url('backend/video/create')}}" class="nav-link">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>Add New</p>
+                          </a>
+                      </li>
+
+                  </ul>
+
+              </li>
+              <li class="nav-item">
+                  <a href="{{url('backend/contact/edit')}}" class="nav-link">
+                      <i class="nav-icon fas fa-th"></i>
+                      <p>
+                          Contact
+                      </p>
+                  </a>
               </li>
               <li class="nav-item">
                   <a  onclick="logout()" class="nav-link">

@@ -52,7 +52,7 @@
           </ul>
         </div>
         <div class="d-none d-lg-block">
-          <a href="#" class="see-all-products">SEE ALL <i class="fa fa-chevron-right ms-1"></i><i class="fa fa-chevron-right"></i></a>
+          <a href="{{ url('/products') }}" class="see-all-products">SEE ALL <i class="fa fa-chevron-right ms-1"></i><i class="fa fa-chevron-right"></i></a>
         </div>
       </div>
       <div class="tab-content px-3 px-lg-0 pt-4" id="myproductContent">
@@ -245,12 +245,13 @@
       object-fit: cover;
     }
     #myproductContent .img-wrapper {
-      background: #eaca9954;
+      background: #eaca9952;
     }
     #myproductContent .product-name {
       margin-top: 18px;
       font-weight: 600;
       font-size: 18px;
+      color: #333;
     }
     #myproductContent .product-price {
       color: #d32f2f;
@@ -262,7 +263,7 @@
       margin: 0 auto;
       text-align: center;
       width: 50%;
-      background: #eaca9954;
+      background: #eaca9952;
       border: 1px solid #d32f2f;
       border-radius: 2px;
       color: #d32f2f;

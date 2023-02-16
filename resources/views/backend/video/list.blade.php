@@ -12,7 +12,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <x-alert></x-alert>
-        <x-minibackheader :maintext="'Banner list'" :subtext="'banner list'"/>
+        <x-minibackheader :maintext="'Video list'" :subtext="'video list'"/>
 
         <!-- Main content -->
         <section class="content">
@@ -22,16 +22,17 @@
                 <div class="card">
                   <div class="card-header row no-gutters">
                     <div class="col-12  d-flex justify-content-between">
-                      <h3 class="card-title">Banner list</h3>
+                      <h3 class="card-title">Video list</h3>
                     </div>
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body">
-                    <table id="bannerTable" class="table table-borderless table-hover">
+                    <table id="videoTable" class="table table-borderless table-hover">
                       <thead>
                         <tr>
                           <th>id</th>
-                          <th>Image</th>
+                          <th>Title</th>
+                          <th>Video</th>
                           <th>Created Date</th>
                           <th>Action</th>
                         </tr>
@@ -40,16 +41,17 @@
                         @php
                             $id = 1;
                         @endphp
-                        @forelse ($banner as $b)
+                        @forelse ($videos as $video)
                           <tr>
                             <td>{{ $id++ }}</td>
-                            <td><img src="{{ asset($b->image)}}" alt="" class="photo"></td>
-                            <td>{{ Carbon\Carbon::parse($b->created_at)->format('F d, Y') }}</td>
+                            <td>{{ $video->title }}</td>
+                            <td>{{ $video->video }}</td>
+                            <td>{{ Carbon\Carbon::parse($video->created_at)->format('F d, Y') }}</td>
                             <td>
-                                <a href="{{ route('backend.banner.edit',$b->id )}}" class="btn btn-info btn-sm">
+                                <a href="{{ route('backend.video.edit',$video->id )}}" class="btn btn-info btn-sm">
                                 <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="{{ route('backend.banner.delete',$b->id )}}" onclick="return confirm('Are you sure you want to delete this banner?');" class="btn btn-danger btn-sm">
+                                <a href="{{ route('backend.video.delete',$video->id )}}" onclick="return confirm('Are you sure you want to delete this video?');" class="btn btn-danger btn-sm">
                                 <i class="fas fa-trash"></i>
                                 </a>
                             </td>
@@ -57,7 +59,7 @@
                           @empty
                               <tr>
                                   <td colspan="6" class="text-center">
-                                      <span>There is no banner</span>
+                                      <span>There is no video</span>
                                   </td>
                               </tr>
                           @endforelse
@@ -80,7 +82,7 @@
 @push('scripts')
 <script>
   $(document).ready( function () {
-    $('#bannerTable').DataTable({
+    $('#videoTable').DataTable({
       "paging": true,
       "lengthChange": true,
       "searching": true,

@@ -1,17 +1,17 @@
 <header class="main-nav container-lg p-0">
   <nav class="d-none d-lg-block py-3">
     <ul class="d-flex justify-content-between align-items-center p-0 mb-0">
-        <li class="me-3"><a href="#">Home</a></li>
-        <li class="me-3"><a href="#">About</a></li>
-        <li class="me-3"><a href="#">Product</a></li>
-        <li class="me-3"><a href="#">Video</a></li>
+        <li class="{{ (request()->is('/')) ? 'active' : '' }} me-3"><a href="{{ url('/') }}">Home</a></li>
+        <li class="{{ (request()->is('about')) ? 'active' : '' }} me-3"><a href="{{url('about')}}">About</a></li>
+        <li class="{{ (request()->is('products')) ? 'active' : '' }} me-3"><a href="{{url('products')}}">Product</a></li>
+        <li class="{{ (request()->is('video')) ? 'active' : '' }} me-3"><a href="{{url('videos')}}">Video</a></li>
         <li>
           <a href="/" class="nav-logo">
             <img src="{{ asset('images/logos/logo.png')}}" alt="" class="logo">
           </a>
         </li>
-        <li class="me-3"><a href="#">Contact</a></li>
-        <li class="me-3"><a href="#">Account</a></li>
+        <li class="{{ (request()->is('contact')) ? 'active' : '' }} me-3"><a href="{{url('contact')}}">Contact</a></li>
+        <li class="{{ (request()->is('account')) ? 'active' : '' }} me-3"><a href="{{url('account')}}">Account</a></li>
         <li class=""><a href="#"><img src="{{ asset('images/icons/search.svg')}}" alt="" class="search"></a></li>
         <li class=""><a href="#"><img src="{{ asset('images/icons/cart.svg')}}" alt="" class="cart"></a></li>
       </ul>
@@ -27,12 +27,17 @@
           <span></span>
         
           <ul id="menu">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Product</a></li>
-            <li><a href="#">Video</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Account</a></li>
+            <li>
+              <a href="/" class="nav-logo">
+                <img src="{{ asset('images/logos/logo.png')}}" alt="" class="logo">
+              </a>
+            </li>
+            <li class="{{ (request()->is('/')) ? 'active' : '' }}"><a href="{{ url('/') }}">Home</a></li>
+            <li class="{{ (request()->is('about')) ? 'active' : '' }}"><a href="{{url('about')}}">About</a></li>
+            <li class="{{ (request()->is('products')) ? 'active' : '' }}"><a href="{{url('products')}}">Product</a></li>
+            <li class="{{ (request()->is('video')) ? 'active' : '' }}"><a href="{{url('videos')}}">Video</a></li>
+            <li class="{{ (request()->is('contact')) ? 'active' : '' }}"><a href="{{url('contact')}}">Contact</a></li>
+            <li class="{{ (request()->is('account')) ? 'active' : '' }}"><a href="{{url('account')}}">Account</a></li>
           </ul>
         </div>
         <a href="/"><h3 class="mb-0">KATHIT</h3></a>
@@ -56,8 +61,8 @@
     a:hover {
       color: #d32f2f;
     }
-    .active {
-      color: #d32f2f;
+    .active a {
+      color: #d32f2f !important;
     }
     .main-nav .logo {
       width: 150px;

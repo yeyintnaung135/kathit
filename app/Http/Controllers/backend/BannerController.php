@@ -19,7 +19,7 @@ class BannerController extends Controller
   }
 
   public function index() {
-    $banners = Banner::all();
+    $banners = Banner::latest()->get();
     return view('backend.banner.list',['banner'=>$banners]);
   }
 

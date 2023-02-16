@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{url('backend/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{url('backend/dist/css/adminlte.min.css')}}">
-    <link rel="icon" type="image/x-icon" href="{{ url('/images/favicon.webp') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url('/images/logos/favicon.png') }}">
     <!-- Daterange picker -->
 {{--    <link rel="stylesheet" href="{{asset('backend/plugins/daterangepicker/daterangepicker.css')}}">--}}
     @stack('css')
