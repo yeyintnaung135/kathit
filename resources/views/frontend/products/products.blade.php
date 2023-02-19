@@ -8,7 +8,7 @@
         <div class="title-banner d-flex justify-content-center align-items-center py-2">
           <img src="{{ url('/images/icons/kanok.png') }}" alt="Kathit" class="left">
           <div class="title">
-            <h3 class="mb-2 text-center text-capitalize" id="title">{{ $cat }}</h3>
+            <h3 class="mb-2 text-center">Products</h3>
             <p class="mb-0 text-center">Let's First Window Shopping & GRAB your loved ones</p>
           </div>
           <img src="{{ url('/images/icons/kanok.png') }}" alt="Kathit" class="right">
@@ -30,10 +30,9 @@
         </div>
       </div>
       <div class="row gx-3 gy-3 gx-lg-3 gy-lg-4" id="product_space">
-        @include('frontend/shop_product_by_cat')
+        @include('frontend/products/shop_product')
       </div>
       <input type="hidden" name="hidden_page" id="hidden_page" value="1" />
-      <input type="hidden" name="hidden_cate_id" id="hidden_cate_id" value="{{$cate_id}}" />
     </div>
   </section>
 @endsection
@@ -41,20 +40,17 @@
 @push('scripts')
   <script>
     $(document).ready(function(){
-      var str = document.getElementById("title").innerHTML;
-      str = str.replace(/-/g, ' ');
-      document.getElementById("title").innerHTML = str;
-
-      function fetch_data(page, sort_type,cateid)
+      function fetch_data(page, sort_type)
        {
         // alert("Sort Type = "+sort_type);
         $.ajax({
-         url:"/categorypagination/fetch_data?page="+page+"&sorttype="+sort_type+"&cate_id="+cateid,
+         url:"/shoppagination/fetch_data?page="+page+"&sorttype="+sort_type,
          success:function(data)
          {
           console.log(data);
           $('#product_space').html('');
           $('#product_space').html(data);
+        //   $('.pagination').hide();
          }
         })
        }
@@ -62,9 +58,8 @@
         // alert("hello");
         var page = $('#hidden_page').val();
         var sort_type = $('#sort_id').val();
-        var cateid = $('#hidden_cate_id').val();
         // alert(page);
-        fetch_data(page, sort_type,cateid);
+        fetch_data(page, sort_type);
        });
        $(document).on('click', '.pagination a', function(event){
         event.preventDefault();
@@ -73,11 +68,11 @@
         $('#hidden_page').val(page);
         var column_name = $('#hidden_column_name').val();
         var sort_type = $('#sort_id').val();
-        var cateid = $('#hidden_cate_id').val();
+
 
         $('li').removeClass('active');
               $(this).parent().addClass('active');
-              fetch_data(page, sort_type,cateid);
+              fetch_data(page, sort_type);
        });
 
     })

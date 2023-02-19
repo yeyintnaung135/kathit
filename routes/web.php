@@ -36,6 +36,8 @@ Route::group(['middleware' => ['web']], function () {
 
   Route::get('/account', [FrontController::class,'account']);
   
+  Route::get('/customize', [FrontController::class,'customize']);
+  
 
 });
 

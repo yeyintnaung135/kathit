@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Models\Product;
+use App\Models\Color;
 
 use App\Admins;
 use Illuminate\Http\Request;
@@ -23,7 +24,8 @@ class ProductsController extends Controller
     }
 
     public function create() {
-      return view('backend.products.create');
+      $colors = Color::orderBy('name', 'asc')->get();
+      return view('backend.products.create', ['colors' => $colors]);
     }
 
     public function store(Request $request){
@@ -33,7 +35,9 @@ class ProductsController extends Controller
       $validator=Validator::make($input,[
           'name'=>['required','max:1000'],
           'product_image'=>['required','mimes:jpeg,bmp,png,jpg'],
-          'price'=>['required','integer']
+          'price'=>['required','integer'],
+          'short_desc'=>['required'],
+          'description'=>['required']
       ]);
       if($validator->fails()){
           return redirect()->back()->withErrors($validator)->withInput();
@@ -127,7 +131,8 @@ class ProductsController extends Controller
 
     public function edit($id) {
       $data=Product::where('id',$id)->first();
-      return view('backend.products.edit',['data'=>$data]);
+      $colors = Color::orderBy('name', 'asc')->get();
+      return view('backend.products.edit',['data'=>$data, 'colors' => $colors]);
     }
 
     public function update(Request $request) {
@@ -158,6 +163,8 @@ class ProductsController extends Controller
         'product_image'=>$input['product_image'],
         'price'=>$input['price'],
         'category_id'=>$input['category_id'],
+        'type'=>$input['type'],
+        'color'=>$input['color'],
         'short_desc'=>$input['short_desc'],
         'description'=>$input['description']
       ]);

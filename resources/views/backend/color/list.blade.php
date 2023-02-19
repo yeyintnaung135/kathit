@@ -1,5 +1,5 @@
 @extends('layouts.backend.tablelayouts')
-@section('title','Kathit | Video Lists')
+@section('title','Kathit | Color Lists')
 @push('css')
     <style>
         .photo{
@@ -12,7 +12,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <x-alert></x-alert>
-        <x-minibackheader :maintext="'Video list'" :subtext="'video list'"/>
+        <x-minibackheader :maintext="'Color list'" :subtext="'color list'"/>
 
         <!-- Main content -->
         <section class="content">
@@ -22,17 +22,17 @@
                 <div class="card">
                   <div class="card-header row no-gutters">
                     <div class="col-12  d-flex justify-content-between">
-                      <h3 class="card-title">Video list</h3>
+                      <h3 class="card-title">Color list</h3>
                     </div>
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body">
-                    <table id="videoTable" class="table table-borderless table-hover">
+                    <table id="colorTable" class="table table-borderless table-hover">
                       <thead>
                         <tr>
                           <th>id</th>
-                          <th>Title</th>
-                          <th>Video</th>
+                          <th>Name</th>
+                          <th>Color Code</th>
                           <th>Created Date</th>
                           <th>Action</th>
                         </tr>
@@ -41,17 +41,17 @@
                         @php
                             $id = 1;
                         @endphp
-                        @forelse ($videos as $video)
+                        @forelse ($colors as $color)
                           <tr>
                             <td>{{ $id++ }}</td>
-                            <td>{{ $video->title }}</td>
-                            <td>{{ $video->video }}</td>
-                            <td>{{ Carbon\Carbon::parse($video->created_at)->format('F d, Y') }}</td>
+                            <td>{{ $color->name }}</td>
+                            <td>{{ $color->code }}</td>
+                            <td>{{ Carbon\Carbon::parse($color->created_at)->format('F d, Y') }}</td>
                             <td>
-                                <a href="{{ route('backend.video.edit',$video->id )}}" class="btn btn-info btn-sm">
+                                <a href="{{ route('backend.color.edit',$color->id )}}" class="btn btn-info btn-sm">
                                 <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="{{ route('backend.video.delete',$video->id )}}" onclick="return confirm('Are you sure you want to delete this video?');" class="btn btn-danger btn-sm">
+                                <a href="{{ route('backend.color.delete',$color->id )}}" onclick="return confirm('Are you sure you want to delete this color?');" class="btn btn-danger btn-sm">
                                 <i class="fas fa-trash"></i>
                                 </a>
                             </td>
@@ -59,7 +59,7 @@
                           @empty
                               <tr>
                                   <td colspan="6" class="text-center">
-                                      <span>There is no video</span>
+                                      <span>There is no color</span>
                                   </td>
                               </tr>
                           @endforelse
@@ -82,7 +82,7 @@
 @push('scripts')
 <script>
   $(document).ready( function () {
-    $('#videoTable').DataTable({
+    $('#colorTable').DataTable({
       "paging": true,
       "lengthChange": true,
       "searching": true,

@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\AdminForgotPasswordController;
 use App\Http\Controllers\Auth\AdminResetPasswordController;
 use App\Http\Controllers\backend\ProductsController;
 use App\Http\Controllers\backend\BannerController;
+use App\Http\Controllers\backend\ColorController;
 use App\Http\Controllers\backend\VideoController;
 use App\Http\Controllers\backend\ContactController;
 
@@ -26,6 +27,18 @@ Route::group(['prefix' => '/backend/product', 'as'=>'backend.product.'],function
     Route::get('/restore/{id}','restore');
     Route::delete('/force_delete/{id}','forceDelete');
   });
+});
+
+Route::group(['prefix' => '/backend/color', 'as'=>'backend.color.'],function (){
+  Route::controller(ColorController::class)->group(function(){
+    Route::get('/list','index');
+        Route::get('/create','create');
+        Route::post('/store','store');
+        Route::get('/edit/{id}','edit')->name('edit');
+        Route::put('/update/{id}','update')->name('update');
+        Route::get('/delete/{id}','delete')->name('delete');
+  });
+
 });
 
 Route::group(['prefix' => '/backend/banner', 'as'=>'backend.banner.'],function (){

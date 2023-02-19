@@ -8,6 +8,7 @@
     <link rel="icon" type="image/x-icon" href="{{ url('/images/logos/favicon.png') }}">
 
     <link rel="stylesheet" type="text/css" href="{{ url('/css/app.css') }}"/>
+    <link rel="stylesheet" href="{{url('test/css/fancybox.css')}}"/>
     <link rel="stylesheet" href="{{url('test/css/swiper-bundle.min.css')}}"/>
     <link rel="stylesheet" href="{{url('backend/plugins/fontawesome-free/css/all.min.css')}}">
 
@@ -24,6 +25,7 @@
     @include('layouts.frontend.footer')
 </div>
 <script src="{{ asset('js/app.js') }}"></script>
+<script src="{{url('test/js/fancybox.js')}}"></script>
 <script src="{{url('test/js/swiper-bundle.min.js')}}"></script>
 <script src="{{url('backend/plugins/jquery/jquery.min.js')}}"></script>
 <script src="{{url('backend/plugins/sweetalert2/sweetalert2.all.js')}}"></script>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\frontend;
 use Mail;
 use App\Models\Product;
 use App\Models\Banner;
+use App\Models\Color;
 use App\Models\Video;
 use App\Models\Contact;
 use App\Mail\ContactMail;
@@ -38,7 +39,7 @@ class FrontController extends Controller
 
     public function products() {
       $products = Product::latest()->paginate(8);
-      return view('frontend.products', ['products' => $products]);
+      return view('frontend.products.products', ['products' => $products]);
     }
 
     function fetch_data(Request $request)
@@ -64,13 +65,13 @@ class FrontController extends Controller
         }
 
         logger($products);
-        return view('frontend.shop_product', compact('products'))->render();
+        return view('frontend.products.shop_product', compact('products'))->render();
       }
     }
 
     public function productsByCat($category, $id) {
       $products = Product::latest()->where('category_id', $id)->paginate(8);
-      return view('frontend.productsbycat', ['products' => $products, 'cat' => $category,'cate_id' => $id]);
+      return view('frontend.products.productsbycat', ['products' => $products, 'cat' => $category,'cate_id' => $id]);
     }
 
     function category_fetch_data(Request $request)
@@ -94,13 +95,20 @@ class FrontController extends Controller
         {
           $products = Product::where('category_id',$request->cate_id)->latest()->paginate(8);
         }
-        return view('frontend.shop_product_by_cat', compact('products'))->render();
+        return view('frontend.products.shop_product_by_cat', compact('products'))->render();
       }
     }
 
     public function product_detail($id) {
       $data = Product::findOrFail($id);
-      return view('frontend.product_detail', ['data' => $data]);
+
+      $min = $data->price - (($data->price * 20) / 100);
+      $max = $data->price + (($data->price * 20) / 100);
+      $sim = Product::where('price', '>=', $min)->where('price', '<=', $max)->where('category_id', $data->category_id)->where('id', '!=', $data->id)->orderBy('price', 'asc')->limit(10)->get();
+      
+      $colors = Color::whereIn('id', json_decode($data->color))->get();
+
+      return view('frontend.products.product_detail', ['data' => $data, 'sim' => $sim, 'colors'=>$colors]);
     }
 
     public function videos(){
@@ -143,6 +151,14 @@ class FrontController extends Controller
     public function account() {
       if(Auth::check() and Auth::user()->role='user') {
         return view('frontend.account.account');
+      } else {
+        return redirect('/login');
+      }
+    }
+
+    public function customize() {
+      if(Auth::check() and Auth::user()->role='user') {
+        return view('frontend.account.customize');
       } else {
         return redirect('/login');
       }

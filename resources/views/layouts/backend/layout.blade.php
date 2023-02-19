@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="{{url('backend/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
     <!-- iCheck -->
     <link rel="stylesheet" href="{{url('backend/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
+    <!-- Color Picker -->
+    <link rel="stylesheet" href="{{url('backend/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css')}}">
     <!-- JQVMap -->
     <link rel="stylesheet" href="{{url('backend/plugins/jqvmap/jqvmap.min.css')}}">
     <!-- Theme style -->
@@ -64,6 +66,8 @@
 </script>
 <!-- Bootstrap 4 -->
 <script src="{{url('backend/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<!-- Color Picker -->
+<script src="{{url('backend/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js')}}"></script>
 <!-- ChartJS -->
 <script src="{{url('backend/plugins/chart.js/Chart.min.js')}}"></script>
 <!-- Sparkline -->
@@ -90,6 +94,7 @@
 <script src="{{url('backend/dist/js/demo.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{url('backend/dist/js/pages/dashboard.js')}}"></script>
+@stack('styles')
 @stack('scripts')
 
 </body>

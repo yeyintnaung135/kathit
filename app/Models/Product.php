@@ -19,8 +19,10 @@ class Product extends Model
         'category_id',
         'short_desc',
         'description',
+        'type',
+        'color',
         'deleted_at'
-    ]; 
+    ];
 
     // public function getProductPhotos()
     // {
