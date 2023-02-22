@@ -21,11 +21,23 @@
       color: rgb(27, 183, 255);
       font-weight: 900;
     }
-    .facebook, .messenger {
-      width: 25px;
+    .facebook, .messenger, .twitter, .pinterest, .youtube,
+    .telegram, .tiktok, .instagram {
       margin-right: 15px;
       margin-top: 15px;
+      margin-right: 15px;
+      margin-top: 15px;
+      background: #fff;
+      border-radius: 50%;
+      border: 1px solid;
     }
+    .facebook, .messenger {
+      width: 25px;
+    }
+    .pinterest, .youtube, .twitter, .telegram, .tiktok, .instagram {
+      width: 27px;
+    }
+    
     @media screen and (max-width: 600px) {
       .main-footer ul {
         font-size: 12px;
@@ -73,6 +85,12 @@
           <li>
             <a href="https://www.facebook.com/HT2276?mibextid=LQQJ4d"><img src="{{ asset('images/icons/facebook.png')}}" alt="" class="facebook"></a>
             <a href="http://m.me/kathitfashion"><img src="{{ asset('images/icons/messenger.png')}}" alt="" class="messenger"></a>
+            <a href="https://twitter.com/hnaung_thway/status/1579427882174382080?s=46&t=StxE4o5zxEGjZC3edOEBOQ"><img src="{{ asset('images/icons/twitter.png')}}" alt="" class="twitter"></a>
+            <a href="https://pin.it/7FE0oc7"><img src="{{ asset('images/icons/pinterest.png')}}" alt="" class="pinterest"></a>
+            <a href="https://youtube.com/@kathit3597"><img src="{{ asset('images/icons/youtube.png')}}" alt="" class="youtube"></a>
+            <a href="https://t.me/Hnaung_Thway"><img src="{{ asset('images/icons/telegram.png')}}" alt="" class="telegram"></a>
+            <a href="https://www.tiktok.com/@ht002276?is_from_webapp=1&sender_device=pc"><img src="{{ asset('images/icons/tiktok.png')}}" alt="" class="tiktok"></a>
+            <a href="https://instagram.com/kathit51?igshid=YWJhMjlhZTc="><img src="{{ asset('images/icons/instagram.png')}}" alt="" class="instagram"></a>
           </li>
         </ul>
       </div>
@@ -89,6 +107,12 @@
           <li>
             <a href="https://www.facebook.com/HT2276?mibextid=LQQJ4d"><img src="{{ asset('images/icons/facebook.png')}}" alt="" class="facebook"></a>
             <a href="http://m.me/kathitfashion"><img src="{{ asset('images/icons/messenger.png')}}" alt="" class="messenger"></a>
+            <a href="https://twitter.com/hnaung_thway/status/1579427882174382080?s=46&t=StxE4o5zxEGjZC3edOEBOQ"><img src="{{ asset('images/icons/twitter.png')}}" alt="" class="twitter"></a>
+            <a href="https://pin.it/7FE0oc7"><img src="{{ asset('images/icons/pinterest.png')}}" alt="" class="pinterest"></a>
+            <a href="https://youtube.com/@kathit3597"><img src="{{ asset('images/icons/youtube.png')}}" alt="" class="youtube"></a>
+            <a href="https://t.me/Hnaung_Thway"><img src="{{ asset('images/icons/telegram.png')}}" alt="" class="telegram"></a>
+            <a href="https://www.tiktok.com/@ht002276?is_from_webapp=1&sender_device=pc"><img src="{{ asset('images/icons/tiktok.png')}}" alt="" class="tiktok"></a>
+            <a href="https://instagram.com/kathit51?igshid=YWJhMjlhZTc="><img src="{{ asset('images/icons/instagram.png')}}" alt="" class="instagram"></a>
           </li>
         </ul>
       </div>
