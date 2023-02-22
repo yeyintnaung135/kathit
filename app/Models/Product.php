@@ -14,7 +14,6 @@ class Product extends Model
     protected $table = 'products';
     protected $fillable = [
         'name',
-        'product_image',
         'price',
         'category_id',
         'short_desc',
@@ -24,10 +23,10 @@ class Product extends Model
         'deleted_at'
     ];
 
-    // public function getProductPhotos()
-    // {
-    //     return $this->hasMany(ProductGallery::class,'product_id');
-    // }
+    public function getProductPhotos()
+    {
+        return $this->hasMany(ProductPhoto::class,'product_id');
+    }
     // public function category() {
     //     return $this->belongsTo('App\Categories','category_id');
     // }

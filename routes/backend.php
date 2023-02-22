@@ -16,12 +16,12 @@ Route::get('/backend/home', function(){
 
 Route::group(['prefix' => '/backend/product', 'as'=>'backend.product.'],function (){
   Route::controller(ProductsController::class)->group(function(){
-    Route::get('/list','list');
+    Route::get('/list','list')->name('list');
     Route::get('/create','create');
-    Route::post('/store','store');
+    Route::post('/store','store')->name('store');
     Route::get('/get_all_products','get_all_products');
     Route::get('/edit/{id}','edit');
-    Route::post('/update/{id}','update');
+    Route::post('/update/{id}','update')->name('update');
     Route::delete('/delete/{id}','destroy');
     Route::get('/trash','trash');
     Route::get('/restore/{id}','restore');

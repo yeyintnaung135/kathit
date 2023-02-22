@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Models\Product;
+use App\Models\ProductPhoto;
 use App\Models\Color;
 
 use App\Admins;
@@ -29,31 +30,51 @@ class ProductsController extends Controller
     }
 
     public function store(Request $request){
-      // dd($request);
-      $input=$request->except('_token');
-
-      $validator=Validator::make($input,[
-          'name'=>['required','max:1000'],
-          'product_image'=>['required','mimes:jpeg,bmp,png,jpg'],
-          'price'=>['required','integer'],
-          'short_desc'=>['required'],
-          'description'=>['required']
+      
+      $request->validate([
+        'name'=>['required','max:1000'],
+        'product_image'=>['required'],
+        'price'=>['required','integer'],
+        'short_desc'=>['required'],
+        'description'=>['required']
       ]);
-      if($validator->fails()){
-          return redirect()->back()->withErrors($validator)->withInput();
+
+      $product = new Product();
+      $product->name = $request->name;
+      $product->price = $request->price;
+      $product->category_id = $request->category_id;
+      $product->short_desc = $request->short_desc;
+      $product->description = $request->description;
+      $product->type = $request->type;
+      $product->color = $request->color;
+      $product->save();
+
+      $folderPath = 'images/products/';
+      if($request->product_image){
+        foreach($request->product_image as $re){
+          $photo = new ProductPhoto();
+          $photo->product_id = $product->id;
+        
+          $image_parts = explode(";base64,", $re);
+          $image_type_aux = explode("image/", $image_parts[0]);
+          // $image_type = $image_type_aux[1];
+          $image_base64 = base64_decode($image_parts[1]);
+    
+          $imageName = uniqid().'_product' . '.png';
+    
+          $imageFullPath = public_path($folderPath.$imageName);
+  
+          file_put_contents($imageFullPath, $image_base64);
+          $photo->product_image = $folderPath.$imageName;
+          $photo->save();
+        }
       }
 
-      $img = $input['product_image'];
-
-      $imageNameone = time().'img'.'.'.$img->getClientOriginalExtension();
-
-      $lpath=$img->move(public_path('images/products/'),$imageNameone);
-      $input['product_image']='images/products/'.$imageNameone;
-      Product::create($input);
-
       Session::flash('message', 'Your product was successfully created');
-
-      return redirect(url('backend/product/list'));
+      return response()->json([
+        'success' => true,
+        'message' => "Your product was successfully created"
+      ]);
     }
 
     public function get_all_products(Request $request) {
@@ -113,7 +134,7 @@ class ProductsController extends Controller
           $data_arr[] = array(
               "id" => $record->id,
               "name" => $record->name,
-              "product_image" => $record->product_image,
+              "product_image" => $record->getProductPhotos[0]->product_image,
               "price" => $record->price,
               "created_at" => date('F d, Y', strtotime($record->created_at)),
               "id" => $record->id,
@@ -135,42 +156,62 @@ class ProductsController extends Controller
       return view('backend.products.edit',['data'=>$data, 'colors' => $colors]);
     }
 
-    public function update(Request $request) {
-      $input=$request->except('_token');
-      $product=Product::where('id',$input['id'])->first();
-      $validator=Validator::make($input,[
+    public function update(Request $request, $id) {
+
+      $request->validate([
         'name'=>['required','max:1000'],
-        'price'=>['required','integer']
+        'price'=>['required','integer'],
+        'short_desc'=>['required'],
+        'description'=>['required']
       ]);
-      if($validator->fails()){
-        return redirect()->back()->withErrors($validator)->withInput();
-      }
-      if($request->file('product_image')) {
-        if (File::exists(public_path($product->product_image))) {
-          File::delete(public_path($product->product_image));
+
+      $product = Product::findOrFail($id);
+      $product->name = $request->name;
+      $product->price = $request->price;
+      $product->category_id = $request->category_id;
+      $product->short_desc = $request->short_desc;
+      $product->description = $request->description;
+      $product->type = $request->type;
+      $product->color = $request->color;
+      $product->save();
+
+      $folderPath = 'images/products/';
+      $get_ptroduct_id = ProductPhoto::where('product_id', $product->id)->get();
+
+      if($request->product_image){
+           
+        foreach($get_ptroduct_id as $id){
+          if($id->product_image){
+            if(File::exists(public_path($id->product_image))){
+              File::delete(public_path($id->product_image));
+            }
+          }
+          $id->ForceDelete();
         }
-        $img = $input['product_image'];
 
-        $imageNameone = time().'img'.'.'.$img->getClientOriginalExtension();
-
-        $lpath=$img->move(public_path('images/products/'),$imageNameone);
-        $input['product_image']='images/products/'.$imageNameone;
-      } else {
-        $input['product_image'] = $product->product_image;
+        foreach($request->product_image as $re){
+          $product_photo = new ProductPhoto();
+          $product_photo->product_id = $product->id;
+          $image_parts = explode(";base64,", $re);
+          $image_type_aux = explode("image/", $image_parts[0]);
+          // $image_type = $image_type_aux[1];
+          $image_base64 = base64_decode($image_parts[1]);
+    
+          $imageName = uniqid().'_product' . '.png';
+    
+          $imageFullPath = public_path($folderPath.$imageName);
+  
+          file_put_contents($imageFullPath, $image_base64);
+          $product_photo->product_image = $folderPath.$imageName;
+          $product_photo->save(); 
+        }
       }
-      Product::where('id',$input['id'])->update([
-        'name'=>$input['name'],
-        'product_image'=>$input['product_image'],
-        'price'=>$input['price'],
-        'category_id'=>$input['category_id'],
-        'type'=>$input['type'],
-        'color'=>$input['color'],
-        'short_desc'=>$input['short_desc'],
-        'description'=>$input['description']
-      ]);
       Session::flash('message', 'Your product was successfully edited');
 
-      return redirect(url('backend/product/list'));
+      return response()->json([
+        'success' => true,
+        'message' => "Product Update Success"
+      ]);
 
     }
 
@@ -193,6 +234,15 @@ class ProductsController extends Controller
     }
 
     public function forceDelete($id) {
+      $photo = ProductPhoto::where('product_id',$id)->get();
+      foreach($photo as $f){
+        if($f->product_image){
+          if(File::exists(public_path($f->product_image))){
+            File::delete(public_path($f->product_image));
+          }
+        }
+        $f->delete();
+      }
       Product::onlyTrashed()->find($id)->forceDelete();
       Session::flash('message', 'Your product was successfully deleted.');
       return redirect(url('backend/product/list'));

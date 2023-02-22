@@ -1,54 +1,3 @@
-<header class="main-nav container-lg p-0">
-  <nav class="d-none d-lg-block py-3">
-    <ul class="d-flex justify-content-between align-items-center p-0 mb-0">
-        <li class="{{ (request()->is('/')) ? 'active' : '' }} me-3"><a href="{{ url('/') }}">Home</a></li>
-        <li class="{{ (request()->is('about')) ? 'active' : '' }} me-3"><a href="{{url('about')}}">About</a></li>
-        <li class="{{ (request()->is('products')) ? 'active' : '' }} me-3"><a href="{{url('products')}}">Product</a></li>
-        <li class="{{ (request()->is('video')) ? 'active' : '' }} me-3"><a href="{{url('videos')}}">Video</a></li>
-        <li>
-          <a href="/" class="nav-logo">
-            <img src="{{ asset('images/logos/logo.png')}}" alt="" class="logo">
-          </a>
-        </li>
-        <li class="{{ (request()->is('contact')) ? 'active' : '' }} me-3"><a href="{{url('contact')}}">Contact</a></li>
-        <li class="{{ (request()->is('account')) ? 'active' : '' }} me-3"><a href="{{url('account')}}">Account</a></li>
-        <li class=""><a href="#"><img src="{{ asset('images/icons/search.svg')}}" alt="" class="search"></a></li>
-        <li class=""><a href="#"><img src="{{ asset('images/icons/cart.svg')}}" alt="" class="cart"></a></li>
-      </ul>
-  </nav>
-  <nav class="mobile-main-nav d-block d-lg-none p-4">
-    <div class="d-flex justify-content-between align-items-center">
-      <div class="d-flex align-items-center">
-        <div id="menuToggle">
-  
-          <input type="checkbox" />
-          <span></span>
-          <span></span>
-          <span></span>
-        
-          <ul id="menu">
-            <li>
-              <a href="/" class="nav-logo">
-                <img src="{{ asset('images/logos/logo.png')}}" alt="" class="logo">
-              </a>
-            </li>
-            <li class="{{ (request()->is('/')) ? 'active' : '' }}"><a href="{{ url('/') }}">Home</a></li>
-            <li class="{{ (request()->is('about')) ? 'active' : '' }}"><a href="{{url('about')}}">About</a></li>
-            <li class="{{ (request()->is('products')) ? 'active' : '' }}"><a href="{{url('products')}}">Product</a></li>
-            <li class="{{ (request()->is('video')) ? 'active' : '' }}"><a href="{{url('videos')}}">Video</a></li>
-            <li class="{{ (request()->is('contact')) ? 'active' : '' }}"><a href="{{url('contact')}}">Contact</a></li>
-            <li class="{{ (request()->is('account')) ? 'active' : '' }}"><a href="{{url('account')}}">Account</a></li>
-          </ul>
-        </div>
-        <a href="/"><h3 class="mb-0">KATHIT</h3></a>
-      </div>
-      <div class="d-flex align-items-center">
-        <div class="me-3"><a href="#"><img src="{{ asset('images/icons/search.svg')}}" alt="" class="search"></a></div>
-        <div class=""><a href="#"><img src="{{ asset('images/icons/cart.svg')}}" alt="" class="cart"></a></div>
-      </div>
-    </div>
-  </nav>
-</header>
 @push('styles')
   <style>
     body {
@@ -210,3 +159,55 @@
     }
   </style>
 @endpush
+
+<header class="main-nav container-lg p-0">
+  <nav class="d-none d-lg-block py-3">
+    <ul class="d-flex justify-content-between align-items-center p-0 mb-0">
+        <li class="{{ (request()->is('/')) ? 'active' : '' }} me-3"><a href="{{ url('/') }}">Home</a></li>
+        <li class="{{ (request()->is('about')) ? 'active' : '' }} me-3"><a href="{{url('about')}}">About</a></li>
+        <li class="{{ (request()->is('products')) ? 'active' : '' }} me-3"><a href="{{url('products')}}">Product</a></li>
+        <li class="{{ (request()->is('video')) ? 'active' : '' }} me-3"><a href="{{url('videos')}}">Video</a></li>
+        <li>
+          <a href="/" class="nav-logo">
+            <img src="{{ asset('images/logos/logo.png')}}" alt="" class="logo">
+          </a>
+        </li>
+        <li class="{{ (request()->is('contact')) ? 'active' : '' }} me-3"><a href="{{url('contact')}}">Contact</a></li>
+        <li class="{{ (request()->is('account')) ? 'active' : '' }} me-3"><a href="{{url('account')}}">Account</a></li>
+        <li class=""><a href="#"><img src="{{ asset('images/icons/search.svg')}}" alt="" class="search"></a></li>
+        <li class=""><a href="#"><img src="{{ asset('images/icons/cart.svg')}}" alt="" class="cart"></a></li>
+      </ul>
+  </nav>
+  <nav class="mobile-main-nav d-block d-lg-none p-4">
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center">
+        <div id="menuToggle">
+  
+          <input type="checkbox" />
+          <span></span>
+          <span></span>
+          <span></span>
+        
+          <ul id="menu">
+            <li>
+              <a href="/" class="nav-logo">
+                <img src="{{ asset('images/logos/logo.png')}}" alt="" class="logo">
+              </a>
+            </li>
+            <li class="{{ (request()->is('/')) ? 'active' : '' }}"><a href="{{ url('/') }}">Home</a></li>
+            <li class="{{ (request()->is('about')) ? 'active' : '' }}"><a href="{{url('about')}}">About</a></li>
+            <li class="{{ (request()->is('products')) ? 'active' : '' }}"><a href="{{url('products')}}">Product</a></li>
+            <li class="{{ (request()->is('video')) ? 'active' : '' }}"><a href="{{url('videos')}}">Video</a></li>
+            <li class="{{ (request()->is('contact')) ? 'active' : '' }}"><a href="{{url('contact')}}">Contact</a></li>
+            <li class="{{ (request()->is('account')) ? 'active' : '' }}"><a href="{{url('account')}}">Account</a></li>
+          </ul>
+        </div>
+        <a href="/"><h3 class="mb-0">KATHIT</h3></a>
+      </div>
+      <div class="d-flex align-items-center">
+        <div class="me-3"><a href="#"><img src="{{ asset('images/icons/search.svg')}}" alt="" class="search"></a></div>
+        <div class=""><a href="#"><img src="{{ asset('images/icons/cart.svg')}}" alt="" class="cart"></a></div>
+      </div>
+    </div>
+  </nav>
+</header>

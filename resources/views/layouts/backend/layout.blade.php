@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Kathit</title>
     <link rel="icon" type="image/x-icon" href="{{ url('/images/logos/favicon.png') }}">
 
@@ -28,6 +29,9 @@
     <link rel="stylesheet" href="{{url('backend/plugins/daterangepicker/daterangepicker.css')}}">
     <!-- summernote -->
     <link rel="stylesheet" href="{{url('backend/plugins/summernote/summernote-bs4.min.css')}}">
+    <!-- drop zone  -->
+    <link rel="stylesheet" href="{{ asset('backend/plugins/dropzone/dropzone.css')}}">
+
     <style>
     </style>
 </head>
@@ -94,6 +98,8 @@
 <script src="{{url('backend/dist/js/demo.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{url('backend/dist/js/pages/dashboard.js')}}"></script>
+<!-- drop zone  -->
+<script src="{{asset('backend/plugins/dropzone/dropzone.js')}}"></script>
 @stack('styles')
 @stack('scripts')
 

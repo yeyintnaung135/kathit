@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\frontend\FrontController;
-// use App\Http\Controllers\frontend\FrontController;
+use App\Http\Controllers\frontend\Customize\SuitCustomizeController;
+use App\Http\Controllers\frontend\Customize\DressCustomizeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +37,9 @@ Route::group(['middleware' => ['web']], function () {
 
   Route::get('/account', [FrontController::class,'account']);
   
-  Route::get('/customize', [FrontController::class,'customize']);
+  Route::get('/customize/{id}', [FrontController::class,'customize']);
+  Route::post('/dresscustomize', [DressCustomizeController::class, 'dresscustomize']);
+  Route::post('/suitcustomize', [SuitCustomizeController::class, 'suitcustomize']);
   
 
 });

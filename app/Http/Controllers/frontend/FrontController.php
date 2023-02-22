@@ -9,6 +9,8 @@ use App\Models\Video;
 use App\Models\Contact;
 use App\Mail\ContactMail;
 use App\Models\ContactMessage;
+use App\Models\DressCustomize;
+use App\Models\SuitCustomize;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rule;
@@ -150,16 +152,26 @@ class FrontController extends Controller
 
     public function account() {
       if(Auth::check() and Auth::user()->role='user') {
-        return view('frontend.account.account');
+        if(session()->get('product_id')) {
+          $product_id = session()->get('product_id');
+          session()->forget('product_id');
+          return redirect('/product/detail/'.$product_id);
+        } else {
+          return view('frontend.account.account');
+        }
       } else {
         return redirect('/login');
       }
     }
 
-    public function customize() {
+    public function customize($id) {
       if(Auth::check() and Auth::user()->role='user') {
-        return view('frontend.account.customize');
+        $dress = DressCustomize::where('user_id', Auth::user()->id)->first();
+        $suit = SuitCustomize::where('user_id', Auth::user()->id)->first();
+
+        return view('frontend.account.customize', ['user_id' => Auth::user()->id, 'product_id' => $id, 'dress' => $dress, 'suit' => $suit]);
       } else {
+        session()->put('product_id', $id);
         return redirect('/login');
       }
     }

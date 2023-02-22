@@ -1,3 +1,41 @@
+@push('styles')
+  <style>
+    .main-footer {
+      background: #d32f2f;
+      color: #fff;
+    }
+    .main-footer ul {
+      list-style: none;
+      padding: 0;
+      line-height: 1.7rem;
+      font-weight: 600;
+    }
+    .main-footer a {
+      text-decoration: none;
+      color: #fff;
+    }
+    .main-footer h4 {
+      font-weight: 600;
+    }
+    .copyright a {
+      color: rgb(27, 183, 255);
+      font-weight: 900;
+    }
+    .facebook, .messenger {
+      width: 25px;
+      margin-right: 15px;
+      margin-top: 15px;
+    }
+    @media screen and (max-width: 600px) {
+      .main-footer ul {
+        font-size: 12px;
+      }
+      .main-footer h4 {
+        font-size: 20px;
+      }
+    }
+  </style>
+@endpush
 <footer class="main-footer p-3 p-lg-5 pb-lg-4">
   <div class="container">
     <div class="row">
@@ -60,42 +98,3 @@
     <p class="text-center mb-0 mt-2 copyright">Copyright @ 2023 Kathit | CREATE BY <a href="https://myanmaronlinetechnology.com/">MOT</a></p>
   </div>
 </footer>
-
-@push('styles')
-  <style>
-    .main-footer {
-      background: #d32f2f;
-      color: #fff;
-    }
-    .main-footer ul {
-      list-style: none;
-      padding: 0;
-      line-height: 1.7rem;
-      font-weight: 600;
-    }
-    .main-footer a {
-      text-decoration: none;
-      color: #fff;
-    }
-    .main-footer h4 {
-      font-weight: 600;
-    }
-    .copyright a {
-      color: rgb(27, 183, 255);
-      font-weight: 900;
-    }
-    .facebook, .messenger {
-      width: 25px;
-      margin-right: 15px;
-      margin-top: 15px;
-    }
-    @media screen and (max-width: 600px) {
-      .main-footer ul {
-        font-size: 12px;
-      }
-      .main-footer h4 {
-        font-size: 20px;
-      }
-    }
-  </style>
-@endpush

@@ -1,5 +1,75 @@
 @extends('layouts.frontend.frontend')
 @section('title','Kathit | Contact')
+@push('styles')
+  <style>
+    .title-banner {
+      /* height: 80px;*/
+      background: #eaca9952; 
+    }
+    .title-banner .left {
+      -webkit-transform: scaleX(-1);
+      transform: scaleX(-1);
+    }
+    .title-banner .right {
+
+    }
+    .title-banner .title {
+      margin: 0 18%;
+      color: #d32f2f;
+    }
+    .title-banner .title h3 {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .email a {
+      text-decoration: underline;
+      color: #2690fd;
+    }
+    .contact-form {
+      border: 1px solid #3330;
+      box-shadow: 0px 0px 7px 1px #d32f2f26;
+      border-radius: 5px;
+    }
+    .contact-form h3{
+      color: #d32f2f;
+      font-weight: 600;
+    }
+    .contact-form .greet {
+      
+    }
+    .contact-form input, .contact-form  textarea {
+      background: #f7f7f7;
+      border: 0;
+      padding: 12px 0 12px 30px;
+      width: 100%;
+      border-radius: 3px;
+      resize: none;
+    }
+    .contact-form button {
+      background: #d32f2f;
+      color: #fff;
+      border: 0;
+      width: 100%;
+      padding: 12px;
+      border-radius: 3px;
+    }
+    .contact-container .info h4 {
+      color: #3d0000;
+      font-weight: 600;
+    }
+    @media screen and (max-width: 600px) {
+      .title-banner .title {
+        margin: 0 5%;
+      }
+      .title-banner .left {
+        width: 60px;
+      }
+      .title-banner .right {
+        width: 60px;
+      }
+    }
+  </style>
+@endpush
 @section('content')
 <x-alert></x-alert>
   <section>
@@ -75,73 +145,4 @@
   </script>
 @endpush
 
-@push('styles')
-  <style>
-    .title-banner {
-      /* height: 80px;*/
-      background: #eaca9952; 
-    }
-    .title-banner .left {
-      -webkit-transform: scaleX(-1);
-      transform: scaleX(-1);
-    }
-    .title-banner .right {
 
-    }
-    .title-banner .title {
-      margin: 0 18%;
-      color: #d32f2f;
-    }
-    .title-banner .title h3 {
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-    .email a {
-      text-decoration: underline;
-      color: #2690fd;
-    }
-    .contact-form {
-      border: 1px solid #3330;
-      box-shadow: 0px 0px 7px 1px #d32f2f26;
-      border-radius: 5px;
-    }
-    .contact-form h3{
-      color: #d32f2f;
-      font-weight: 600;
-    }
-    .contact-form .greet {
-      
-    }
-    .contact-form input, .contact-form  textarea {
-      background: #f7f7f7;
-      border: 0;
-      padding: 12px 0 12px 30px;
-      width: 100%;
-      border-radius: 3px;
-      resize: none;
-    }
-    .contact-form button {
-      background: #d32f2f;
-      color: #fff;
-      border: 0;
-      width: 100%;
-      padding: 12px;
-      border-radius: 3px;
-    }
-    .contact-container .info h4 {
-      color: #3d0000;
-      font-weight: 600;
-    }
-    @media screen and (max-width: 600px) {
-      .title-banner .title {
-        margin: 0 5%;
-      }
-      .title-banner .left {
-        width: 60px;
-      }
-      .title-banner .right {
-        width: 60px;
-      }
-    }
-  </style>
-@endpush

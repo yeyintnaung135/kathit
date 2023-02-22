@@ -5,6 +5,7 @@
         .photo{
             width: 100px;
             height:100px;
+            object-fit: cover;
         }
     </style>
 @endpush
@@ -48,7 +49,7 @@
                             <td>{{ $id++ }}</td>
                             <td>{{ $p->name }}</td>
                             <td>
-                              <img class="photo" src="{{url($p->product_image)}}">
+                              <img class="photo" src="{{url($p->getProductPhotos[0]->product_image)}}">
                             </td>
                             <td>{{ $p->price }} MMK</td>
                             <td>{{ Carbon\Carbon::parse($p->deleted_at)->format('F d, Y') }}</td>

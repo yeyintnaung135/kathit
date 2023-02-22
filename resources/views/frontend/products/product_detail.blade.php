@@ -8,17 +8,21 @@
             <div class="position-relative">
               <div class="swiper productDetailSwiper">
                   <div class="swiper-wrapper">
-                    <div class="swiper-slide" data-src="{{ url($data->product_image) }}"
+                    @foreach ($data->getProductPhotos as $photo )
+                    <div class="swiper-slide" data-src="{{ url($photo->product_image) }}"
                           data-fancybox="product_detail">
-                      <img src="{{ url($data->product_image) }}"/>
+                      <img src="{{ url($photo->product_image) }}"/>
                     </div>
+                    @endforeach
                   </div>
               </div>
               <div thumbsSlider="" class="swiper productDetailSwiperthumb">
                   <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                      <img src="{{ url($data->product_image) }}"/>
-                    </div>
+                    @foreach ($data->getProductPhotos as $photo )
+                      <div class="swiper-slide">
+                        <img src="{{ url($photo->product_image) }}"/>
+                      </div>
+                    @endforeach
                   </div>
               </div>
             </div>
@@ -26,6 +30,7 @@
           <div class="col-12 col-md-6 ps-lg-5 mt-3 mt-lg-0">
             <h4 class="pd-name">{{ $data->name }}</h4>
             <p class="pd-price my-3">{{ $data->price }} MMK</p>
+            @if (count($colors) > 0)
             <div class="my-4 pb-1 pd-color">
               <h5 class="mb-3">Color</h5>
               <div class="d-flex flex-wrap">
@@ -44,6 +49,7 @@
                 @endforeach
               </div>
             </div>
+            @endif
             @if ($data->type == 'readytowear')
               <div class="my-4 py-1 pd-size">
                 <div class="d-flex justify-content-between align-self-end mb-3">
@@ -77,7 +83,7 @@
               </div>
             @elseif ($data->type == 'customize')
               <div class="my-4 py-1 pd-cus">
-                <a href="{{ url('/customize') }}" class="d-flex justify-content-between align-items-center align-self-center">
+                <a href="{{ url('/customize/'.$data->id) }}" class="d-flex justify-content-between align-items-center align-self-center">
                   <span>Customize Your Dress</span>
                   <i class="fa fa-arrow-right float-end"></i>
                 </a>
@@ -137,7 +143,7 @@
                   <div class="">
                     <a href="{{url('/product/detail/'.$s->id)}}" class="">
                       <div class="img-wrapper">
-                        <img src="{{ asset($s->product_image)}}" alt="" class="product-img">
+                        <img src="{{ asset($s->getProductPhotos[0]->product_image)}}" alt="" class="product-img">
                       </div>
                       <h5 class="product-name">{{ $s->name }}</h5>
                       <span class="product-price">{{ $s->price }} MMK</span>

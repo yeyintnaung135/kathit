@@ -1,5 +1,110 @@
 @extends('layouts.frontend.frontend')
 @section('title','Kathit | About')
+@push('styles')
+  <style>
+    p {
+      line-height: 2rem;
+    }
+    .founder img {
+      width: 125px;
+      position: absolute;
+      top: -17px;
+      right: -12px;
+    }
+    .founder-bg {
+      width: 120px;
+      margin: 0 auto;
+      background: #d32f2f;
+      height: 120px;
+      border-radius: 82px;
+    }
+    .founder .name {
+      font-weight: 600;
+      color: #d32f2f;
+    }
+    .founder .position {
+      font-weight: 600;
+      color: #3d0000;
+      font-size: 15px;
+    }
+    .title-banner {
+      /* height: 80px;*/
+      background: #eaca9952; 
+    }
+    .title-banner .left {
+      -webkit-transform: scaleX(-1);
+      transform: scaleX(-1);
+    }
+    .title-banner .right {
+
+    }
+    .title-banner .title {
+      margin: 0 18%;
+      color: #d32f2f;
+    }
+    .title-banner .title h3 {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .text-highlight {
+      color: #d32f2f;
+    }
+    .whatwedo {
+      background: #eaca9952;
+    }
+    .missionvision .mission,
+    .missionvision .vision,
+    .missionvision .values {
+      border: 1px solid #3330;
+      box-shadow: 0px 0px 4px 1px #d32f2f1c;
+      border-radius: 5px;
+    }
+
+    .missionvision .mission img,
+    .missionvision .vision img,
+    .missionvision .values img{
+      height: 70px;
+    }
+
+    .missionvision .mission h4,
+    .missionvision .vision h4,
+    .missionvision .values h4 {
+      font-weight: 600;
+      font-size: 18px;
+      color: #d32f2f;
+    }
+    .whatwedo h4 {
+      color: #d32f2f;
+      font-weight: 600;
+    }
+    .whatwedo hr {
+      border-top: 4px solid #d32f2f;
+      opacity: 1;
+      width: 73px;
+      margin: 15px auto 25px auto;
+      border-radius: 3px;
+    }
+    .whatwedo img {
+      width: 35px;
+      margin-right: 25px;
+    }
+
+    @media screen and (max-width: 600px) {
+      .title-banner .title {
+        margin: 0 5%;
+      }
+      .title-banner .left {
+        width: 60px;
+      }
+      .title-banner .right {
+        width: 60px;
+      }
+      .founder-bg {
+        margin-left: 33px;
+      }
+    }
+  </style>
+@endpush
 @section('content')
   <section>
     <div class="sn-about-banner">
@@ -108,110 +213,4 @@
   <script>
     
   </script>
-@endpush
-
-@push('styles')
-  <style>
-    p {
-      line-height: 2rem;
-    }
-    .founder img {
-      width: 125px;
-      position: absolute;
-      top: -17px;
-      right: -12px;
-    }
-    .founder-bg {
-      width: 120px;
-      margin: 0 auto;
-      background: #d32f2f;
-      height: 120px;
-      border-radius: 82px;
-    }
-    .founder .name {
-      font-weight: 600;
-      color: #d32f2f;
-    }
-    .founder .position {
-      font-weight: 600;
-      color: #3d0000;
-      font-size: 15px;
-    }
-    .title-banner {
-      /* height: 80px;*/
-      background: #eaca9952; 
-    }
-    .title-banner .left {
-      -webkit-transform: scaleX(-1);
-      transform: scaleX(-1);
-    }
-    .title-banner .right {
-
-    }
-    .title-banner .title {
-      margin: 0 18%;
-      color: #d32f2f;
-    }
-    .title-banner .title h3 {
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-    .text-highlight {
-      color: #d32f2f;
-    }
-    .whatwedo {
-      background: #eaca9952;
-    }
-    .missionvision .mission,
-    .missionvision .vision,
-    .missionvision .values {
-      border: 1px solid #3330;
-      box-shadow: 0px 0px 4px 1px #d32f2f1c;
-      border-radius: 5px;
-    }
-
-    .missionvision .mission img,
-    .missionvision .vision img,
-    .missionvision .values img{
-      height: 70px;
-    }
-
-    .missionvision .mission h4,
-    .missionvision .vision h4,
-    .missionvision .values h4 {
-      font-weight: 600;
-      font-size: 18px;
-      color: #d32f2f;
-    }
-    .whatwedo h4 {
-      color: #d32f2f;
-      font-weight: 600;
-    }
-    .whatwedo hr {
-      border-top: 4px solid #d32f2f;
-      opacity: 1;
-      width: 73px;
-      margin: 15px auto 25px auto;
-      border-radius: 3px;
-    }
-    .whatwedo img {
-      width: 35px;
-      margin-right: 25px;
-    }
-
-    @media screen and (max-width: 600px) {
-      .title-banner .title {
-        margin: 0 5%;
-      }
-      .title-banner .left {
-        width: 60px;
-      }
-      .title-banner .right {
-        width: 60px;
-      }
-      .founder-bg {
-        margin-left: 33px;
-      }
-    }
-  </style>
 @endpush
