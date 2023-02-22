@@ -124,7 +124,10 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <img src="{{ url('/images/sizeguide/sizeguide.jpg') }}" alt="Kathit" class="w-100">
+                  <img src="{{ url('/images/sizeguide/sizeguide1.jpg') }}" alt="Kathit" class="w-100">
+                  <br>
+                  <br>
+                  <img src="{{ url('/images/sizeguide/sizeguide2.jpg') }}" alt="Kathit" class="w-100">
                 </div>
               </div>
             </div>
