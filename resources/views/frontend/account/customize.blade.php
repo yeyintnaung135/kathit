@@ -45,45 +45,45 @@
                         <span style="color: red;">*</span> Measuring by
                       </label>
                       <select name="measurement" id="measurement">
-                        <option value="Centimeter" {{old('measurement',$dress->measurement)=='Centimeter' ? 'selected' : ''}}>Centimeter</option>
-                        <option value="Inches" {{old('measurement',$dress->measurement)=='Inches' ? 'selected' : ''}}>Inches</option>
+                        <option value="Centimeter" {{isset($dress->measurement) && old('measurement',$dress->measurement)=='Centimeter' ? 'selected' : ''}}>Centimeter</option>
+                        <option value="Inches" {{isset($dress->measurement) && old('measurement',$dress->measurement)=='Inches' ? 'selected' : ''}}>Inches</option>
                       </select>
                     </div>
                     <div class="">
                       <label for="shoulder" class="d-block">Shoulder</label>
-                      <input type="text" name="shoulder" id="shoulder" value="{{old('shoulder',$dress->shoulder)}}" placeholder="Fill your shoulder size" required>
+                      <input type="text" name="shoulder" id="shoulder" value="{{old('shoulder',isset($dress->shoulder) ? $dress->shoulder : '')}}" placeholder="Fill your shoulder size" required>
                     </div>
                     <div class="">
                       <label for="chest" class="d-block">Chest</label>
-                      <input type="text" name="chest" id="chest" value="{{old('chest',$dress->chest)}}" placeholder="Fill your chest size" required>
+                      <input type="text" name="chest" id="chest" value="{{old('chest',isset($dress->chest) ? $dress->chest : '')}}" placeholder="Fill your chest size" required>
                     </div>
                     <div class="">
                       <label for="bust" class="d-block">Bust</label>
-                      <input type="text" name="bust" id="bust" value="{{old('bust',$dress->bust)}}" placeholder="Fill your bust size" required>
+                      <input type="text" name="bust" id="bust" value="{{old('bust',isset($dress->bust) ? $dress->bust : '')}}" placeholder="Fill your bust size" required>
                     </div>
                     <div class="">
                       <label for="waist" class="d-block">Waist</label>
-                      <input type="text" name="waist" id="waist" value="{{old('waist',$dress->waist)}}" placeholder="Fill your waist size" required>
+                      <input type="text" name="waist" id="waist" value="{{old('waist',isset($dress->waist) ? $dress->waist : '')}}" placeholder="Fill your waist size" required>
                     </div>
                     <div class="">
                       <label for="hips" class="d-block">Hips</label>
-                      <input type="text" name="hips" id="hips" value="{{old('hips',$dress->hips)}}" placeholder="Fill your hips size" required>
+                      <input type="text" name="hips" id="hips" value="{{old('hips',isset($dress->hips) ? $dress->hips : '')}}" placeholder="Fill your hips size" required>
                     </div>
                     <div class="">
                       <label for="neck" class="d-block">Neck</label>
-                      <input type="text" name="neck" id="neck" value="{{old('neck',$dress->neck)}}" placeholder="Fill your neck size" required>
+                      <input type="text" name="neck" id="neck" value="{{old('neck',isset($dress->neck) ? $dress->neck : '')}}" placeholder="Fill your neck size" required>
                     </div>
                     <div class="">
                       <label for="sleeve" class="d-block">Sleeve</label>
-                      <input type="text" name="sleeve" id="sleeve" value="{{old('sleeve',$dress->sleeve)}}" placeholder="Fill your sleeve size" required>
+                      <input type="text" name="sleeve" id="sleeve" value="{{old('sleeve',isset($dress->sleeve) ? $dress->neck : '')}}" placeholder="Fill your sleeve size" required>
                     </div>
                     <div class="">
                       <label for="length" class="d-block">Length</label>
-                      <input type="text" name="length" id="length" value="{{old('length',$dress->length)}}" placeholder="Fill your dress length" required>
+                      <input type="text" name="length" id="length" value="{{old('length',isset($dress->length) ? $dress->neck : '')}}" placeholder="Fill your dress length" required>
                     </div>
                     <div class="">
                       <label for="waist_to_floor" class="d-block">Waist to Floor</label>
-                      <input type="text" name="waist_to_floor" id="waist_to_floor" value="{{old('waist_to_floor',$dress->waist_to_floor)}}" placeholder="Fill your waist to floor length" required>
+                      <input type="text" name="waist_to_floor" id="waist_to_floor" value="{{old('waist_to_floor',isset($dress->waist_to_floor) ? $dress->waist_to_floor : '')}}" placeholder="Fill your waist to floor length" required>
                     </div>
                     <button type="submit" class="form-submit">
                       SAVE
@@ -110,29 +110,29 @@
                             <span style="color: red;">*</span> Measuring by
                           </label>
                           <select name="measurement" id="measurement">
-                            <option value="Centimeter" {{old('measurement',$suit->measurement)=='Centimeter' ? 'selected' : ''}}>Centimeter</option>
-                            <option value="Inches" {{old('measurement',$suit->measurement)=='Inches' ? 'selected' : ''}}>Inches</option>
+                            <option value="Centimeter" {{isset($suit->measurement) && old('measurement',$suit->measurement)=='Centimeter' ? 'selected' : ''}}>Centimeter</option>
+                            <option value="Inches" {{isset($suit->measurement) && old('measurement',$suit->measurement)=='Inches' ? 'selected' : ''}}>Inches</option>
                           </select>
                         </div>
                         <div class="">
                           <label for="shoulder" class="d-block">Shoulder</label>
-                          <input type="text" name="shoulder" id="shoulder" value="{{old('shoulder',$suit->shoulder)}}" placeholder="Fill your shoulder size" required>
+                          <input type="text" name="shoulder" id="shoulder" value="{{old('shoulder',isset($suit->shoulder) ? $suit->shoulder : '')}}" placeholder="Fill your shoulder size" required>
                         </div>
                         <div class="">
                           <label for="chest" class="d-block">Chest</label>
-                          <input type="text" name="chest" id="chest" value="{{old('chest',$suit->chest)}}" placeholder="Fill your chest size" required>
+                          <input type="text" name="chest" id="chest" value="{{old('chest',isset($suit->chest) ? $suit->chest : '')}}" placeholder="Fill your chest size" required>
                         </div>
                         <div class="">
                           <label for="neck" class="d-block">Neck</label>
-                          <input type="text" name="neck" id="neck" value="{{old('neck',$suit->neck)}}" placeholder="Fill your neck size" required>
+                          <input type="text" name="neck" id="neck" value="{{old('neck',isset($suit->neck) ? $suit->neck : '')}}" placeholder="Fill your neck size" required>
                         </div>
                         <div class="">
                           <label for="sleeve" class="d-block">Sleeve</label>
-                          <input type="text" name="sleeve" id="sleeve" value="{{old('sleeve',$suit->sleeve)}}" placeholder="Fill your sleeve size" required>
+                          <input type="text" name="sleeve" id="sleeve" value="{{old('sleeve',isset($suit->sleeve) ? $suit->sleeve : '')}}" placeholder="Fill your sleeve size" required>
                         </div>
                         <div class="">
                           <label for="top_length" class="d-block">Top Length</label>
-                          <input type="text" name="top_length" id="top_length" value="{{old('top_length',$suit->top_length)}}" placeholder="Fill your Length size" required>
+                          <input type="text" name="top_length" id="top_length" value="{{old('top_length',isset($suit->top_length) ? $suit->top_length : '')}}" placeholder="Fill your Length size" required>
                         </div>
                       </div>
                     </div>
@@ -144,27 +144,27 @@
                       <div class="col-12 col-lg-4">
                         <div class="">
                           <label for="waist" class="d-block">Waist</label>
-                          <input type="text" name="waist" id="waist" value="{{old('waist',$suit->waist)}}" placeholder="Fill your waist size" required>
+                          <input type="text" name="waist" id="waist" value="{{old('waist',isset($suit->waist) ? $suit->waist : '')}}" placeholder="Fill your waist size" required>
                         </div>
                         <div class="">
                           <label for="hips" class="d-block">Hips</label>
-                          <input type="text" name="hips" id="hips" value="{{old('hips',$suit->hips)}}" placeholder="Fill your hips size" required>
+                          <input type="text" name="hips" id="hips" value="{{old('hips',isset($suit->hips) ? $suit->hips : '')}}" placeholder="Fill your hips size" required>
                         </div>
                         <div class="">
                           <label for="pants_length" class="d-block">Pants Length</label>
-                          <input type="text" name="pants_length" id="pants_length" value="{{old('pants_length',$suit->pants_length)}}" placeholder="Fill your pants length size" required>
+                          <input type="text" name="pants_length" id="pants_length" value="{{old('pants_length',isset($suit->pants_length) ? $suit->pants_length : '')}}" placeholder="Fill your pants length size" required>
                         </div>
                         <div class="">
                           <label for="thigh_length" class="d-block">Thigh Length</label>
-                          <input type="text" name="thigh_length" id="thigh_length" value="{{old('thigh_length',$suit->thigh_length)}}" placeholder="Fill your thigh length size" required>
+                          <input type="text" name="thigh_length" id="thigh_length" value="{{old('thigh_length',isset($suit->thigh_length) ? $suit->thigh_length : '')}}" placeholder="Fill your thigh length size" required>
                         </div>
                         <div class="">
                           <label for="leg_opening" class="d-block">Leg Opening</label>
-                          <input type="text" name="leg_opening" id="leg_opening" value="{{old('leg_opening',$suit->leg_opening)}}" placeholder="Fill your leg opening size" required>
+                          <input type="text" name="leg_opening" id="leg_opening" value="{{old('leg_opening',isset($suit->leg_opening) ? $suit->leg_opening : '')}}" placeholder="Fill your leg opening size" required>
                         </div>
                         <div class="">
                           <label for="inseam" class="d-block">Inseam</label>
-                          <input type="text" name="inseam" id="inseam" value="{{old('inseam',$suit->inseam)}}" placeholder="Fill your inseam size" required>
+                          <input type="text" name="inseam" id="inseam" value="{{old('inseam',isset($suit->inseam) ? $suit->inseam : '')}}" placeholder="Fill your inseam size" required>
                         </div>
                         <button type="submit" class="form-submit">
                           SAVE
@@ -288,6 +288,17 @@
     .title-banner .title h3 {
       font-weight: bold;
       margin-bottom: 5px;
+    }
+    @media screen and (max-width: 600px) {
+      .title-banner .title {
+        margin: 0 5%;
+      }
+      .title-banner .left {
+        width: 60px;
+      }
+      .title-banner .right {
+        width: 60px;
+      }
     }
   </style>
 @endpush

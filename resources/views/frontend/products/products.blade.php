@@ -190,5 +190,16 @@
         margin-right: 20px;
       }
     }
+    @media screen and (max-width: 600px) {
+      .title-banner .title {
+        margin: 0 5%;
+      }
+      .title-banner .left {
+        width: 60px;
+      }
+      .title-banner .right {
+        width: 60px;
+      }
+    }
   </style>
 @endpush

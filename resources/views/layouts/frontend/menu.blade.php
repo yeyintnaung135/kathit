@@ -159,7 +159,9 @@
     }
   </style>
 @endpush
-
+@php
+  $count = isset(Auth::user()->id) ? App\Models\Addtocart::where('user_id',Auth::user()->id)->sum('count') : '';
+@endphp
 <header class="main-nav container-lg p-0">
   <nav class="d-none d-lg-block py-3">
     <ul class="d-flex justify-content-between align-items-center p-0 mb-0">
@@ -175,7 +177,12 @@
         <li class="{{ (request()->is('contact')) ? 'active' : '' }} me-3"><a href="{{url('contact')}}">Contact</a></li>
         <li class="{{ (request()->is('account')) ? 'active' : '' }} me-3"><a href="{{url('account')}}">Account</a></li>
         <li class=""><a href="#"><img src="{{ asset('images/icons/search.svg')}}" alt="" class="search"></a></li>
-        <li class=""><a href="#"><img src="{{ asset('images/icons/cart.svg')}}" alt="" class="cart"></a></li>
+        <li class="position-relative">
+          <a href="{{ url('/addtocart') }}">
+            <img src="{{ asset('images/icons/cart.svg')}}" alt="" class="cart">
+          </a>
+          <span class="position-absolute" style="top: -12px;">{{ $count }}</span>
+        </li>
       </ul>
   </nav>
   <nav class="mobile-main-nav d-block d-lg-none p-4">
@@ -206,7 +213,10 @@
       </div>
       <div class="d-flex align-items-center">
         <div class="me-3"><a href="#"><img src="{{ asset('images/icons/search.svg')}}" alt="" class="search"></a></div>
-        <div class=""><a href="#"><img src="{{ asset('images/icons/cart.svg')}}" alt="" class="cart"></a></div>
+        <div class="position-relative">
+          <a href="{{ url('/addtocart') }}"><img src="{{ asset('images/icons/cart.svg')}}" alt="" class="cart"></a>
+          <span class="position-absolute" style="top: -12px;">{{ $count }}</span>
+        </div>
       </div>
     </div>
   </nav>

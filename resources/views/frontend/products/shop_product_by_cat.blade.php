@@ -7,7 +7,7 @@
       <h5 class="product-name">{{ $product->name }}</h5>
       <span class="product-price">{{ $product->price }} MMK</span>
     </a>
-    <button class="add-to-cart">+</button>
+    {{-- <button class="add-to-cart">+</button> --}}
   </div>
 @endforeach
 <div class="mt-5">

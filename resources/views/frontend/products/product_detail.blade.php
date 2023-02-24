@@ -28,6 +28,7 @@
             </div>
           </div>
           <div class="col-12 col-md-6 ps-lg-5 mt-3 mt-lg-0">
+            <input type="hidden" name="product_id" value="{{ $data->id }}" id="product_id">
             <h4 class="pd-name">{{ $data->name }}</h4>
             <p class="pd-price my-3">{{ $data->price }} MMK</p>
             @if (count($colors) > 0)
@@ -37,12 +38,12 @@
                 @foreach ($colors as $index => $color)
                   @if ($index == 0)
                     <div class="me-2">
-                      <input type="radio" id="{{ $color->name }}" name="color" value="{{ $color->name }}" class="radio-color" checked>
+                      <input type="radio" id="{{ $color->name }}" name="color" value="{{ $color->id }}" class="radio-color" checked>
                       <label for="{{ $color->name }}" class="{{ $color->name }}" style="background: {{ $color->code }};"></label>
                     </div>
                   @else
                     <div class="me-2">
-                      <input type="radio" id="{{ $color->name }}" name="color" value="{{ $color->name }}" class="radio-color">
+                      <input type="radio" id="{{ $color->name }}" name="color" value="{{ $color->id }}" class="radio-color">
                       <label for="{{ $color->name }}" class="{{ $color->name }}" style="background: {{ $color->code }};"></label>
                     </div>
                   @endif
@@ -90,7 +91,7 @@
               </div>
             @endif
             <div class="my-3 pd-button d-flex">
-              <button class="pd-atc">Add To Cart</button>
+              <button class="pd-atc" onclick="clickfunction()">Add To Cart</button>
               <a href="#" class="pd-buynow">Buy It Now</a>
             </div>
             <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -174,7 +175,7 @@
       font-weight: bold;
     }
     .modal-dialog {
-      max-width: 100% !important;
+      max-width: 90% !important;
     }
     .radio-color {
       display: none;
@@ -264,6 +265,9 @@
       border: 0px;
       border-bottom: 1px solid #000 !important;
       padding: 0;
+    }
+    .modal.show .modal-dialog {
+      margin: 20px auto !important;
     }
 
     .productDetailSwiper {
@@ -386,5 +390,40 @@
         },
       },
     });
+
+    function clickfunction () {
+
+      var product_id = $('#product_id').val();
+      var color = $('input[name="color"]:checked').val();
+      var readytowear_size = $('input[name="size"]:checked').val();
+
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      })
+      $.ajax({
+        url: "{{ url('/storeproducttocart') }}",
+        method: "POST",
+        data: {
+          product_id: product_id, 
+          qty: 1, 
+          color: color, 
+          readytowear_size: readytowear_size
+        },
+        success: function(response) {
+          if(response.error == 'needtologin') {
+            window.location.href = "{{ url('/login')}}";
+          } else if (response.error == 'needtocustomize') {
+            window.location.href = `{{ url('/customize/${response.product_id}') }}`;
+          } else {
+            window.location.reload();
+          }
+        },
+        error: function(err) {
+          console.log('error');
+        }
+      })
+    }
   </script>
 @endpush

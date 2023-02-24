@@ -32,7 +32,7 @@
       border: 1px solid;
     }
     .facebook, .messenger {
-      width: 25px;
+      width: 27px;
     }
     .pinterest, .youtube, .twitter, .telegram, .tiktok, .instagram {
       width: 27px;
@@ -119,6 +119,6 @@
     </div>
   </div>
   <div>
-    <p class="text-center mb-0 mt-2 copyright">Copyright @ 2023 Kathit | CREATE BY <a href="https://myanmaronlinetechnology.com/">MOT</a></p>
+    <p class="text-center mb-0 mt-2 copyright">Copyright @ 2023 Kathit | CREATED BY <a href="https://myanmaronlinetechnology.com/">MOT</a></p>
   </div>
 </footer>

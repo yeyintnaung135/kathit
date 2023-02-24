@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class OrderDressCustomize extends Model
 {
-    protected $table = 'dress_customize';
+    protected $table = 'order_dress_customize';
     protected $fillable = [
         'user_id',
         'product_id',
+        'payment_id',
         'measurement',
         'shoulder',
         'chest',

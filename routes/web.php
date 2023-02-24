@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\frontend\FrontController;
+use App\Http\Controllers\frontend\AccountController;
+use App\Http\Controllers\frontend\ProductController;
 use App\Http\Controllers\frontend\Customize\SuitCustomizeController;
 use App\Http\Controllers\frontend\Customize\DressCustomizeController;
 
@@ -22,12 +24,12 @@ Auth::routes();
 Route::group(['middleware' => ['web']], function () {
   Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
   Route::get('/', [FrontController::class, 'index']);
-  Route::get('/products', [FrontController::class, 'products']);
-  Route::get('/product/detail/{id}', [FrontController::class, 'product_detail']);
-  Route::get('/shoppagination/fetch_data', [FrontController::class, 'fetch_data']);
+  Route::get('/products', [ProductController::class, 'products']);
+  Route::get('/product/detail/{id}', [ProductController::class, 'product_detail']);
+  Route::get('/shoppagination/fetch_data', [ProductController::class, 'fetch_data']);
 
-  Route::get('/products-category/{category}/{id}', [FrontController::class, 'productsByCat']);
-  Route::get('/categorypagination/fetch_data', [FrontController::class, 'category_fetch_data']);
+  Route::get('/products-category/{category}/{id}', [ProductController::class, 'productsByCat']);
+  Route::get('/categorypagination/fetch_data', [ProductController::class, 'category_fetch_data']);
 
   Route::get('/videos', [FrontController::class, 'videos']);
 
@@ -35,12 +37,18 @@ Route::group(['middleware' => ['web']], function () {
   Route::get('/contact', [FrontController::class, 'contact']);
   Route::post('/contact-message', [FrontController::class, 'store_message']);
 
-  Route::get('/account', [FrontController::class,'account']);
+  Route::get('/account', [AccountController::class,'account']);
   
-  Route::get('/customize/{id}', [FrontController::class,'customize']);
+  Route::get('/customize/{id}', [AccountController::class,'customize']);
   Route::post('/dresscustomize', [DressCustomizeController::class, 'dresscustomize']);
   Route::post('/suitcustomize', [SuitCustomizeController::class, 'suitcustomize']);
   
+  Route::get('/addtocart', [AccountController::class, 'addtocart']);
+  Route::post('/storeproducttocart', [AccountController::class, 'storeproducttocart']);
+  Route::post('/updatecart', [AccountController::class, 'updatecart']);
+  Route::get('/billingaddress', [AccountController::class, 'billingaddress']);
+  Route::post('/storebillingaddress', [AccountController::class, 'storebillingaddress']);
+  Route::get('/payment', [AccountController::class, 'payment']);
 
 });
 

@@ -2,7 +2,7 @@
 @section('title','Kathit | About')
 @push('styles')
   <style>
-    p {
+    .about-container p {
       line-height: 2rem;
     }
     .founder img {
