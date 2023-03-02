@@ -36,11 +36,13 @@
                     <tr class="">
                       <td class="border py-4 order-detail-link"><a href="{{ url('/account/view-order/'.$order->id) }}">#{{ $order->id }}</a></td>
                       <td class="border py-4"> {{ \Carbon\Carbon::parse($order->created_at)->toFormattedDateString() }} </td>
-                      @if ($order->status == 'success')
+                      @if ($order->status == 'completed')
                         <td class="border py-4 bold status-success"> <span>{{ $order->status }}</span> </td>
                       @elseif ($order->status == 'pending')
                         <td class="border py-4 bold status-pending"> <span>{{ $order->status }}</span> </td>
-                      @else
+                      @elseif ($order->status == 'processing')
+                        <td class="border py-4 bold status-processing"> <span>{{ $order->status }}</span> </td>
+                      @elseif ($order->status == 'cancelled')
                         <td class="border py-4 bold status-error"> <span>{{ $order->status }}</span> </td>
                       @endif
                         <td class="border py-4 bold"> <span>{{ $order->payment_method }}</span> </td>
@@ -85,6 +87,11 @@
     }
     .status-pending span{
       color: #fbc03a;
+      padding: 4px;
+      border-radius: 3px;
+    }
+    .status-processing span {
+      color: #00a7e9;
       padding: 4px;
       border-radius: 3px;
     }

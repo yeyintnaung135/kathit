@@ -9,6 +9,7 @@ use App\Http\Controllers\backend\BannerController;
 use App\Http\Controllers\backend\ColorController;
 use App\Http\Controllers\backend\VideoController;
 use App\Http\Controllers\backend\ContactController;
+use App\Http\Controllers\backend\OrderController;
 
 Route::get('/backend/home', function(){
   return view('backend.home');
@@ -32,11 +33,11 @@ Route::group(['prefix' => '/backend/product', 'as'=>'backend.product.'],function
 Route::group(['prefix' => '/backend/color', 'as'=>'backend.color.'],function (){
   Route::controller(ColorController::class)->group(function(){
     Route::get('/list','index');
-        Route::get('/create','create');
-        Route::post('/store','store');
-        Route::get('/edit/{id}','edit')->name('edit');
-        Route::put('/update/{id}','update')->name('update');
-        Route::get('/delete/{id}','delete')->name('delete');
+    Route::get('/create','create');
+    Route::post('/store','store');
+    Route::get('/edit/{id}','edit')->name('edit');
+    Route::put('/update/{id}','update')->name('update');
+    Route::get('/delete/{id}','delete')->name('delete');
   });
 
 });
@@ -44,11 +45,22 @@ Route::group(['prefix' => '/backend/color', 'as'=>'backend.color.'],function (){
 Route::group(['prefix' => '/backend/banner', 'as'=>'backend.banner.'],function (){
   Route::controller(BannerController::class)->group(function(){
     Route::get('/list','index');
-        Route::get('/create','create');
-        Route::post('/store','store');
-        Route::get('/edit/{id}','edit')->name('edit');
-        Route::put('/update/{id}','update')->name('update');
-        Route::get('/delete/{id}','delete')->name('delete');
+    Route::get('/create','create');
+    Route::post('/store','store');
+    Route::get('/edit/{id}','edit')->name('edit');
+    Route::put('/update/{id}','update')->name('update');
+    Route::get('/delete/{id}','delete')->name('delete');
+  });
+
+});
+
+Route::group(['prefix' => '/backend/order', 'as'=>'backend.banner.'],function (){
+  Route::controller(OrderController::class)->group(function(){
+    Route::get('/list','index');
+    Route::get('/get_all_orders','get_all_orders');
+    Route::get('/edit/{id}','edit')->name('edit');
+    Route::post('/update','update')->name('update');
+    // Route::get('/delete/{id}','delete')->name('delete');
   });
 
 });
@@ -56,11 +68,11 @@ Route::group(['prefix' => '/backend/banner', 'as'=>'backend.banner.'],function (
 Route::group(['prefix' => '/backend/video', 'as'=>'backend.video.'],function (){
   Route::controller(VideoController::class)->group(function(){
     Route::get('/list','index');
-        Route::get('/create','create');
-        Route::post('/store','store');
-        Route::get('/edit/{id}','edit')->name('edit');
-        Route::put('/update/{id}','update')->name('update');
-        Route::get('/delete/{id}','delete')->name('delete');
+    Route::get('/create','create');
+    Route::post('/store','store');
+    Route::get('/edit/{id}','edit')->name('edit');
+    Route::put('/update/{id}','update')->name('update');
+    Route::get('/delete/{id}','delete')->name('delete');
   });
 
 });
