@@ -194,7 +194,8 @@
                       </table>
                       <div>
                         @if ($payment->payment_screenshot)
-                          <img src="{{ url($payment->payment_screenshot) }}" alt="" class="w-100 mt-3">
+                          <h5 class="mt-4 mb-3">Payment Screenshot</h5>
+                          <img src="{{ url($payment->payment_screenshot) }}" alt="" class="w-100 ">
                         @endif
                       </div>
                     </div>
