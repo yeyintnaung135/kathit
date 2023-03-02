@@ -38,6 +38,13 @@ Route::group(['middleware' => ['web']], function () {
   Route::post('/contact-message', [FrontController::class, 'store_message']);
 
   Route::get('/account', [AccountController::class,'account']);
+  Route::post('/account', [AccountController::class,'editaccount']);
+  Route::get('/account/orders', [AccountController::class,'getorders']);
+  Route::get('/account/view-order/{id}', [AccountController::class,'view_order']);
+  Route::get('/account/billing-address', [AccountController::class,'getbillingaddress']);
+  Route::post('/account/billing-address', [AccountController::class,'editbillingaddress']);
+  Route::get('/account/change-password', [AccountController::class,'getchangepassword']);
+  Route::post('/account/change-password', [AccountController::class,'editchangepassword']);
   
   Route::get('/customize/{id}', [AccountController::class,'customize']);
   Route::post('/dresscustomize', [DressCustomizeController::class, 'dresscustomize']);
@@ -49,7 +56,7 @@ Route::group(['middleware' => ['web']], function () {
   Route::get('/billingaddress', [AccountController::class, 'billingaddress']);
   Route::post('/storebillingaddress', [AccountController::class, 'storebillingaddress']);
   Route::get('/payment', [AccountController::class, 'payment']);
-
+  Route::post('/checkout', [AccountController::class, 'checkout']);
 });
 
 require "backend.php";

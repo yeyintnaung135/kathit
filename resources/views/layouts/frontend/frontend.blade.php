@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{url('test/css/fancybox.css')}}"/>
     <link rel="stylesheet" href="{{url('test/css/swiper-bundle.min.css')}}"/>
     <link rel="stylesheet" href="{{url('backend/plugins/fontawesome-free/css/all.min.css')}}">
+    <link rel="stylesheet" href="{{url('backend/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
 
     <style>
      

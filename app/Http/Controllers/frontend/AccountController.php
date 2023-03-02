@@ -6,17 +6,23 @@ use Mail;
 use App\Models\DressCustomize;
 use App\Models\SuitCustomize;
 use App\Models\Addtocart;
+use App\Models\Payment;
 use App\Models\Product;
 use App\Models\OrderDressCustomize;
 use App\Models\OrderSuitCustomize;
 use App\Models\Billingaddress;
 use App\Models\OrderBillingaddress;
+use App\Models\OrderProduct;
+use App\Models\User;
 
+use App\Rules\MatchOldPassword;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -31,15 +37,107 @@ class AccountController extends Controller
 
     public function account() {
       if(Auth::check() and Auth::user()->role='user') {
+        $user = Auth::guard('web')->user();
         if(session()->get('product_id')) {
           $product_id = session()->get('product_id');
           session()->forget('product_id');
           return redirect('/product/detail/'.$product_id);
         } else {
-          return view('frontend.account.account');
+          return view('frontend.account.account', ['user' => $user]);
         }
       } else {
         return redirect('/login');
+      }
+    }
+
+    public function editaccount(Request $request) {
+      $input=$request->except('_token');
+      $validator=Validator::make($input,[
+        'name'=>['required','max:1000'],
+        'email' => 'required|email',
+      ]);
+      if($validator->fails()){
+        return redirect()->back()->withErrors($validator)->withInput();
+      }
+      $input['user_id'] = Auth::user()->id;
+      $result = User::updateOrCreate(['id' => $input['user_id']], $input);
+      if($result){
+        return redirect()->back()->with('success','Update successfully!');
+      }
+    }
+
+    public function getorders() {
+      if(Auth::check() and Auth::user()->role='user') {
+        $orders = Payment::where('user_id', Auth::guard('web')->user()->id)->orderBy('id','desc')->get();
+        return view('frontend.account.orders', ['orders' => $orders]);
+      } else {
+        return redirect('/login');
+      }
+    }
+
+    public function view_order($id) {
+      if(Auth::check() and Auth::user()->role='user') {
+        $payment = Payment::where('id', $id)->first();
+        $billing = OrderBillingaddress::where('payment_id', $payment->id)->first();
+        $orders = OrderProduct::where('payment_id', $payment->id)->whereIn('product_id', json_decode($payment->product_id))->get();
+        return view('frontend.account.view_order', ['payment' => $payment, 'billing' => $billing, 'orders' => $orders]);
+      } else {
+        return redirect('/login');
+      }
+    }
+
+    public function getbillingaddress() {
+      $billing = Billingaddress::where('user_id', Auth::user()->id)->first();
+      if(Auth::check() and Auth::user()->role='user') {
+        return view('frontend.account.billing', ['billing' => $billing]);
+      } else {
+        return redirect('/login');
+      }
+    }
+
+    public function editbillingaddress(Request $request) {
+      $input=$request->except('_token');
+      $validator=Validator::make($input,[
+        'name'=>['required','max:1000'],
+        'email' => 'required|email',
+        'phone' => 'required|digits:10|numeric',
+        'address' => 'required',
+        'state'=>['required','max:1000'],
+        'city'=>['required','max:1000']
+      ]);
+      if($validator->fails()){
+        return redirect()->back()->withErrors($validator)->withInput();
+      }
+      $input['user_id'] = Auth::user()->id;
+      $result = Billingaddress::updateOrCreate(['user_id' => $input['user_id']], $input);
+      if($result){
+        return redirect()->back()->with('success','Update successfully!');
+      }
+    }
+
+    public function getchangepassword() {
+      if(Auth::check() and Auth::user()->role='user') {
+        return view('frontend.account.password');
+      } else {
+        return redirect('/login');
+      }
+    }
+
+    public function editchangepassword(Request $request) {
+      $input=$request->except('_token');
+      $validator=Validator::make($input,[
+        'current_password'=>['required','min:8', new MatchOldPassword],
+        'new_password' => ['required','min:8','different:current_password'],
+        'new_confirm_password' => 'same:new_password',
+      ]);
+      if($validator->fails()){
+        return redirect()->back()->withErrors($validator)->withInput();
+      }
+      $user = User::findOrFail(Auth::user()->id);
+      $user->password = Hash::make($request->new_password);
+      $result = $user->update();
+      if($result){
+        return redirect()->back()->with('success','Update successfully!');
       }
     }
 
@@ -105,10 +203,6 @@ class AccountController extends Controller
       } else {
         return redirect('/login');
       }
-    }
-
-    public function checkout() {
-      return 'checkout';
     }
 
     public function storeproducttocart(Request $request) {
@@ -232,5 +326,68 @@ class AccountController extends Controller
       } else {
         return;
       }
+    }
+
+    public function checkout(Request $request) {
+      $input=$request->except('_token');
+      if($input['payment_method'] == 'Direct Bank') {
+        $validator=Validator::make($input,[
+          'payment_screenshot'=>['required','mimes:jpeg,bmp,png,jpg']
+        ]);
+        if($validator->fails()){
+          return redirect()->back()->withErrors($validator)->withInput();
+        }
+        $img = $input['payment_screenshot'];
+  
+        $imageNameone = time().'img'.'.'.$img->getClientOriginalExtension();
+  
+        $lpath=$img->move(public_path('images/payments/'),$imageNameone);
+        $input['payment_screenshot']='images/payments/'.$imageNameone;
+      } else {
+        $input['payment_screenshot']= NULL;
+      }
+      $products_id = Product::leftjoin('addtocart', 'products.id', '=', 'addtocart.product_id')
+                    ->where('addtocart.user_id', Auth::user()->id)
+                    ->pluck('addtocart.product_id');
+      $p_ids = [];
+      foreach ($products_id as $p_id) {
+        array_push($p_ids, $p_id);
+      }
+      $input['user_id'] = Auth::user()->id;
+      $input['product_id'] = json_encode($p_ids);
+      
+      $payment = Payment::create($input);
+      OrderDressCustomize::where('user_id', Auth::user()->id)->whereNull('payment_id')->whereIn('product_id',$p_ids)->update(['payment_id' => $payment->id]);
+      OrderSuitCustomize::where('user_id', Auth::user()->id)->whereNull('payment_id')->whereIn('product_id',$p_ids)->update(['payment_id' => $payment->id]);
+
+      $billing_address = Billingaddress::where('user_id', Auth::user()->id)->first();
+      $order_billing_address = [
+        'user_id' => Auth::user()->id,
+        'name' => $billing_address->name,
+        'phone' => $billing_address->phone,
+        'email' => $billing_address->email,
+        'address' => $billing_address->address,
+        'state' => $billing_address->state,
+        'city' => $billing_address->city,
+        'payment_id' => $payment->id
+      ];
+
+      OrderBillingaddress::create($order_billing_address);
+
+      $add_to_cart = Addtocart::where('user_id', Auth::user()->id)->get();
+      foreach ($add_to_cart as $atc) {
+        $order_product = [
+          'user_id' => Auth::user()->id,
+          'product_id' => $atc->product_id,
+          'payment_id' => $payment->id,
+          'count' => $atc->count,
+          'color_id' => $atc->color_id,
+          'readytowear_size' => $atc->readytowear_size,
+        ];
+        OrderProduct::create($order_product);
+      }
+
+      Addtocart::where('user_id', Auth::user()->id)->whereIn('product_id',$p_ids)->delete();
+      return redirect(url('/account/orders'));
     }
 }

@@ -270,7 +270,7 @@
                                   <div class="card card-outline card-info">
                                       <div class="card-header">
                                           <h3 class="card-title">
-                                              Short Description <span style="color:red;font-size:13px;font-weight:bold;">*</span>
+                                              Description <span style="color:red;font-size:13px;font-weight:bold;">*</span>
                                           </h3>
                                       </div>
                                       <!-- /.card-header -->
@@ -297,7 +297,7 @@
                             <div class="card card-outline card-info">
                                 <div class="card-header">
                                     <h3 class="card-title">
-                                        Description <span style="color:red;font-size:13px;font-weight:bold;">*</span>
+                                      About Product <span style="color:red;font-size:13px;font-weight:bold;">*</span>
                                     </h3>
                                 </div>
                                 <!-- /.card-header -->

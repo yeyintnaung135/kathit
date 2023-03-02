@@ -91,8 +91,9 @@
               </div>
             @endif
             <div class="my-3 pd-button d-flex">
-              <button class="pd-atc" onclick="clickfunction()">Add To Cart</button>
-              <a href="#" class="pd-buynow">Buy It Now</a>
+              <button class="pd-atc" onclick="addtocart('a2c')">Add To Cart</button>
+              <button class="pd-buynow" onclick="addtocart('buynow')">Buy It Now</button>
+              {{-- <a href="#" class="pd-buynow">Buy It Now</a> --}}
             </div>
             <div class="accordion accordion-flush" id="accordionFlushExample">
               <div class="">
@@ -391,7 +392,7 @@
       },
     });
 
-    function clickfunction () {
+    function addtocart (info) {
 
       var product_id = $('#product_id').val();
       var color = $('input[name="color"]:checked').val();
@@ -417,7 +418,11 @@
           } else if (response.error == 'needtocustomize') {
             window.location.href = `{{ url('/customize/${response.product_id}') }}`;
           } else {
-            window.location.reload();
+            if(info == 'buynow') {
+              window.location.href = `{{ url('/addtocart') }}`;
+            } else {
+              window.location.reload();
+            }
           }
         },
         error: function(err) {

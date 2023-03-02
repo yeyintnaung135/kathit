@@ -9,6 +9,6 @@ class OrderBillingaddress extends Model
 {
     protected $table = 'order_billing_address';
     protected $fillable = [
-      'user_id', 'product_id', 'payment_id', 'name', 'phone', 'email', 'address', 'state', 'city'
+      'user_id', 'payment_id', 'name', 'phone', 'email', 'address', 'state', 'city'
     ]; 
 }
