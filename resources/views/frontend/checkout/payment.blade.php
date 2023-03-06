@@ -189,7 +189,7 @@
       border-bottom: 1px solid #000 !important;
       padding: 0;
     }
-    .modal-dialog {
+    #exampleModal .modal-dialog {
       max-width: 90% !important;
       margin: 20px auto !important;
     }

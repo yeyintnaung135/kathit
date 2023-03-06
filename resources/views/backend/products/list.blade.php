@@ -53,7 +53,7 @@
                                 <table id="productsTable" class="table table-borderless table-hover">
                                   <thead>
                                     <tr>
-                                      <th>id</th>
+                                      <th>Brand Code</th>
                                       <th>Name</th>
                                       <th>Photo</th>
                                       <th>Price</th>
@@ -95,7 +95,7 @@
         }
       },
       columns: [
-        {data: 'id'},
+        {data: 'brand_code'},
 
         {data: 'name'},
         {

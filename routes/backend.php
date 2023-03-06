@@ -54,7 +54,7 @@ Route::group(['prefix' => '/backend/banner', 'as'=>'backend.banner.'],function (
 
 });
 
-Route::group(['prefix' => '/backend/order', 'as'=>'backend.banner.'],function (){
+Route::group(['prefix' => '/backend/order', 'as'=>'backend.order.'],function (){
   Route::controller(OrderController::class)->group(function(){
     Route::get('/list','index');
     Route::get('/get_all_orders','get_all_orders');

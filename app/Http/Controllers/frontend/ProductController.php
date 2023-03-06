@@ -26,27 +26,63 @@ class ProductController extends Controller
       $products = Product::latest()->paginate(8);
       return view('frontend.products.products', ['products' => $products]);
     }
+    
+    public function products_search($searchtext = null) {
+      $products = Product::where(function ($query) use ($searchtext) {
+                    $query->where('brand_code', 'like', '%' . $searchtext . '%')
+                      ->orWhere('name', 'like', '%' . $searchtext . '%')
+                      ->orWhere('price', 'like', '%' . $searchtext . '%')
+                      ->orWhere('short_desc', 'like', '%' . $searchtext . '%')
+                      ->orWhere('description', 'like', '%' . $searchtext . '%');
+                  })->latest()->paginate(8);
+      return view('frontend.products.products', ['products' => $products, 'searchtext' => $searchtext]);
+    }
 
     function fetch_data(Request $request)
     {
       if($request->ajax())
       {
         $sort_type = $request->get('sorttype');
+        $searchtext = $request->searchtext == null ? '' : $request->searchtext;
         if($sort_type == 2)
         {
-          $products = Product::latest()->paginate(8);
+          $products = Product::where(function ($query) use ($searchtext) {
+                        $query->where('brand_code', 'like', '%' . $searchtext . '%')
+                          ->orWhere('name', 'like', '%' . $searchtext . '%')
+                          ->orWhere('price', 'like', '%' . $searchtext . '%')
+                          ->orWhere('short_desc', 'like', '%' . $searchtext . '%')
+                          ->orWhere('description', 'like', '%' . $searchtext . '%');
+                      })->latest()->paginate(8);
         }
         elseif($sort_type == 3)
         {
-          $products = Product::orderBy('price','asc')->paginate(8);
+          $products = Product::where(function ($query) use ($searchtext) {
+                        $query->where('brand_code', 'like', '%' . $searchtext . '%')
+                          ->orWhere('name', 'like', '%' . $searchtext . '%')
+                          ->orWhere('price', 'like', '%' . $searchtext . '%')
+                          ->orWhere('short_desc', 'like', '%' . $searchtext . '%')
+                          ->orWhere('description', 'like', '%' . $searchtext . '%');
+                      })->orderBy('price','asc')->paginate(8);
         }
         elseif($sort_type == 4)
         {
-          $products = Product::orderBy('price','desc')->paginate(8);
+          $products = Product::where(function ($query) use ($searchtext) {
+                        $query->where('brand_code', 'like', '%' . $searchtext . '%')
+                          ->orWhere('name', 'like', '%' . $searchtext . '%')
+                          ->orWhere('price', 'like', '%' . $searchtext . '%')
+                          ->orWhere('short_desc', 'like', '%' . $searchtext . '%')
+                          ->orWhere('description', 'like', '%' . $searchtext . '%');
+                      })->orderBy('price','desc')->paginate(8);
         }
         else
         {
-          $products = Product::latest()->paginate(8);
+          $products = Product::where(function ($query) use ($searchtext) {
+                        $query->where('brand_code', 'like', '%' . $searchtext . '%')
+                          ->orWhere('name', 'like', '%' . $searchtext . '%')
+                          ->orWhere('price', 'like', '%' . $searchtext . '%')
+                          ->orWhere('short_desc', 'like', '%' . $searchtext . '%')
+                          ->orWhere('description', 'like', '%' . $searchtext . '%');
+                      })->latest()->paginate(8);
         }
 
         logger($products);

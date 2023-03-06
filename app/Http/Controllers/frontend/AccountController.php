@@ -100,7 +100,7 @@ class AccountController extends Controller
       $validator=Validator::make($input,[
         'name'=>['required','max:1000'],
         'email' => 'required|email',
-        'phone' => 'required|digits:10|numeric',
+        'phone' => 'required|numeric',
         'address' => 'required',
         'state'=>['required','max:1000'],
         'city'=>['required','max:1000']
@@ -181,7 +181,7 @@ class AccountController extends Controller
       $validator=Validator::make($input,[
         'name'=>['required','max:1000'],
         'email' => 'required|email',
-        'phone' => 'required|digits:10|numeric',
+        'phone' => 'required|numeric',
         'address' => 'required',
         'state'=>['required','max:1000'],
         'city'=>['required','max:1000']

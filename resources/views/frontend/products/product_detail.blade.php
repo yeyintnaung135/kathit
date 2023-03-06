@@ -175,7 +175,7 @@
       padding: 9px 30px;
       font-weight: bold;
     }
-    .modal-dialog {
+    #exampleModal .modal-dialog {
       max-width: 90% !important;
     }
     .radio-color {
@@ -267,7 +267,7 @@
       border-bottom: 1px solid #000 !important;
       padding: 0;
     }
-    .modal.show .modal-dialog {
+    #exampleModal .modal.show .modal-dialog {
       margin: 20px auto !important;
     }
 

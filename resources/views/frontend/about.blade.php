@@ -73,11 +73,11 @@
       font-size: 18px;
       color: #d32f2f;
     }
-    .whatwedo h4 {
+    .whatwedo h4, .director h4 {
       color: #d32f2f;
       font-weight: 600;
     }
-    .whatwedo hr {
+    .whatwedo hr, .director hr {
       border-top: 4px solid #d32f2f;
       opacity: 1;
       width: 73px;
@@ -87,6 +87,28 @@
     .whatwedo img {
       width: 35px;
       margin-right: 25px;
+    }
+    .director-cart {
+      text-align: center;
+      box-shadow: 1px 1px 12px 6px #d32f2f1c;
+      padding: 40px 0;
+      margin-top: 20px;
+    }
+    .director-cart img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      margin: 0 auto;
+      /* border: 2px solid #d32f2f; */
+    }
+    .director-cart h5 {
+      font-weight: bold;
+      color: #d32f2f;
+      margin-bottom: 0;
+      margin-top: 22px;
     }
 
     @media screen and (max-width: 600px) {
@@ -101,6 +123,13 @@
       }
       .founder-bg {
         margin-left: 33px;
+      }
+      .director-cart img {
+        width: 100px;
+        height: 100px;
+      }
+      .director-cart {
+        padding: 25px 0;
       }
     }
   </style>
@@ -154,7 +183,7 @@
               <p>
                 မြန်မာနိုင်ငံမှာ ပထမဆုံး customized order များကို online စနစ်ဖြင့် လက်ခံဆောင်ရွက်ပေးသော ဝန်ဆောင်မှု လုပ်ငန်းနှင့် ကိုယ်ပိုင်အမှတ်တံဆိပ်ဖြင့် 
                 အမျိုးသား/ အမျိုးသမီး ဝတ်အထည်များ ထုတ်လုပ်ဖြန့်ဖြူးရောင်းချခြင်းကို  online စနစ်ဖြင့် အော်ဒါများလက်ခံပီး မြန်မာပြည်အနှံ့အပြားနှင့် 
-                <span class="text-highlight">စင်္ကပူ၊ မလေးရှား၊ထိုင်း၊အမေရိကနိုင်ငံ</span>များသို့လည်း delivery စနစ်ဖြင့် အလျင်မြန်ဆုံးပို့ဆောင်ပေးခြင်းဖြင့် Customer အများအပြား၏  စိတ်ကျေနပ်မှုအပြည့်ဖြင့် 
+                <span class="text-highlight">စင်္ကာပူ၊ မလေးရှား၊ထိုင်း၊အမေရိကနိုင်ငံ</span>များသို့လည်း delivery စနစ်ဖြင့် အလျင်မြန်ဆုံးပို့ဆောင်ပေးခြင်းဖြင့် Customer အများအပြား၏  စိတ်ကျေနပ်မှုအပြည့်ဖြင့် 
                 ယုံကြည်အားပေးဝယ်ယူခြင်းများကို လက်ခံရရှိပီး Company ရဲ့ ပုံရိပ်ကိုလည်း တန်ဘိုးမြှင့်တက်စေခဲ့ပါသည်။ 
               </p>
             </div>
@@ -201,6 +230,43 @@
               <p>
                 ဆန်းသစ် လှပမှုနဲ့ ယုံကြည်စိတ်ချရမှုကို အလျင်မြန်ဆုံး ပေးစွမ်းတာ Kathit Fashion ပါ။
               </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="director my-5 py-5">
+        <div class="container">
+          <h4 class="text-center">Our Directors</h4>
+          <hr>
+          <div class="row">
+            <div class="col-6 col-md-3">
+              <div class="director-cart">
+                <img src="{{ url('images/directors/1.png') }}" alt="">
+                <h5>Name</h5>
+                <p class="mb-0">CEO & Director</p>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="director-cart">
+                <img src="{{ url('images/directors/2.png') }}" alt="">
+                <h5>Name</h5>
+                <p class="mb-0">CEO & Director</p>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="director-cart">
+                <img src="{{ url('images/directors/3.png') }}" alt="">
+                <h5>Name</h5>
+                <p class="mb-0">CEO & Director</p>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="director-cart">
+                <img src="{{ url('images/directors/4.png') }}" alt="">
+                <h5>Name</h5>
+                <p class="mb-0">CEO & Director</p>
+              </div>
             </div>
           </div>
         </div>

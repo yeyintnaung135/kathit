@@ -29,10 +29,16 @@
           </select>
         </div>
       </div>
+
+      @if (isset($searchtext))
+        <h4 class="mb-4">Search Result for "<span class="highlight">{{ $searchtext }}</span>"</h4>
+      @endif
+      
       <div class="row gx-3 gy-3 gx-lg-3 gy-lg-4" id="product_space">
         @include('frontend/products/shop_product')
       </div>
       <input type="hidden" name="hidden_page" id="hidden_page" value="1" />
+      <input type="hidden" name="searchtext" id="searchtext" value="{{ isset($searchtext) ? $searchtext : '' }}" />
     </div>
   </section>
 @endsection
@@ -40,11 +46,11 @@
 @push('scripts')
   <script>
     $(document).ready(function(){
-      function fetch_data(page, sort_type)
+      function fetch_data(page, sort_type, searchtext)
        {
         // alert("Sort Type = "+sort_type);
         $.ajax({
-         url:"/shoppagination/fetch_data?page="+page+"&sorttype="+sort_type,
+         url:"/shoppagination/fetch_data?page="+page+"&sorttype="+sort_type+"&searchtext="+searchtext,
          success:function(data)
          {
           console.log(data);
@@ -58,8 +64,9 @@
         // alert("hello");
         var page = $('#hidden_page').val();
         var sort_type = $('#sort_id').val();
+        var searchtext = $('#searchtext').val();
         // alert(page);
-        fetch_data(page, sort_type);
+        fetch_data(page, sort_type, searchtext);
        });
        $(document).on('click', '.pagination a', function(event){
         event.preventDefault();
@@ -68,11 +75,11 @@
         $('#hidden_page').val(page);
         var column_name = $('#hidden_column_name').val();
         var sort_type = $('#sort_id').val();
-
+        var searchtext = $('#searchtext').val();
 
         $('li').removeClass('active');
               $(this).parent().addClass('active');
-              fetch_data(page, sort_type);
+              fetch_data(page, sort_type, searchtext);
        });
 
     })
@@ -81,6 +88,9 @@
 
 @push('styles')
   <style>
+    .highlight {
+      color: #d32f2f;
+    }
     .title-banner {
       /* height: 80px;*/
       background: #eaca9952; 

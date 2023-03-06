@@ -33,6 +33,7 @@ class ProductsController extends Controller
       
       $request->validate([
         'name'=>['required','max:1000'],
+        'brand_code'=>['required','max:1000'],
         'product_image'=>['required'],
         'price'=>['required','integer'],
         'short_desc'=>['required'],
@@ -42,6 +43,7 @@ class ProductsController extends Controller
       $product = new Product();
       $product->name = $request->name;
       $product->price = $request->price;
+      $product->brand_code = $request->brand_code;
       $product->category_id = $request->category_id;
       $product->short_desc = $request->short_desc;
       $product->description = $request->description;
@@ -104,7 +106,7 @@ class ProductsController extends Controller
 
       $totalRecords = Product::select('count(*) as allcount')
                       ->where(function ($query) use ($searchValue) {
-                        $query->where('id', 'like', '%' . $searchValue . '%')
+                        $query->where('brand_code', 'like', '%' . $searchValue . '%')
                             ->orWhere('name', 'like', '%' . $searchValue . '%')
                             ->orWhere('price', 'like', '%' . $searchValue . '%')
                             ->orWhere('short_desc', 'like', '%' . $searchValue . '%')
@@ -116,7 +118,7 @@ class ProductsController extends Controller
       $records = Product::orderBy($columnName, $columnSortOrder)
           ->orderBy('created_at', 'desc')
           ->where(function ($query) use ($searchValue) {
-              $query->where('id', 'like', '%' . $searchValue . '%')
+              $query->where('brand_code', 'like', '%' . $searchValue . '%')
                   ->orWhere('name', 'like', '%' . $searchValue . '%')
                   ->orWhere('price', 'like', '%' . $searchValue . '%')
                   ->orWhere('short_desc', 'like', '%' . $searchValue . '%')
@@ -132,7 +134,7 @@ class ProductsController extends Controller
 
       foreach ($records as $record) {
           $data_arr[] = array(
-              "id" => $record->id,
+              "brand_code" => $record->brand_code,
               "name" => $record->name,
               "product_image" => $record->getProductPhotos[0]->product_image,
               "price" => $record->price,
@@ -157,10 +159,10 @@ class ProductsController extends Controller
     }
 
     public function update(Request $request, $id) {
-
       $request->validate([
         'name'=>['required','max:1000'],
         'price'=>['required','integer'],
+        'brand_code'=>['required','max:1000'],
         'short_desc'=>['required'],
         'description'=>['required']
       ]);
@@ -168,6 +170,7 @@ class ProductsController extends Controller
       $product = Product::findOrFail($id);
       $product->name = $request->name;
       $product->price = $request->price;
+      $product->brand_code = $request->brand_code;
       $product->category_id = $request->category_id;
       $product->short_desc = $request->short_desc;
       $product->description = $request->description;

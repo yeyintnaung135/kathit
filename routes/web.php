@@ -25,6 +25,7 @@ Route::group(['middleware' => ['web']], function () {
   Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
   Route::get('/', [FrontController::class, 'index']);
   Route::get('/products', [ProductController::class, 'products']);
+  Route::get('/products/{typesearch}', [ProductController::class, 'products_search']);
   Route::get('/product/detail/{id}', [ProductController::class, 'product_detail']);
   Route::get('/shoppagination/fetch_data', [ProductController::class, 'fetch_data']);
 

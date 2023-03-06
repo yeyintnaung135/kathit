@@ -274,6 +274,16 @@
                                           </div>
                                         </div>
                                       </div>
+                                      <div class="col-12 col-md-6">
+                                          <label for="exampleInputEmail1">Brand Code<span style="color:red;font-size:13px;font-weight:bold;">*</span></label>
+                                          <input type="text" name="brand_code"
+                                                class="form-control  @error('brand_code') is-invalid @enderror "
+                                                id="exampleInputEmail1" value="{{old('brand_code',$data->brand_code)}}"
+                                                placeholder="Enter Brand code" required min="0"
+                                          >
+                
+                
+                                      </div>
                                     </div>
 
                                     <div class="form-group">
@@ -513,6 +523,7 @@
         name: jQuery("input[name=name]").val(),
         type: jQuery("select[name=type]").val(),
         price: jQuery("input[name=price]").val(),
+        brand_code: jQuery("input[name=brand_code]").val(),
         category_id: jQuery("select[name=category_id]").val(),
         color: jQuery("input[name=color]").val(),
         short_desc: jQuery("textarea[name=short_desc]").val(),

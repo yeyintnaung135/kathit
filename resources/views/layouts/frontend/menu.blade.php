@@ -128,7 +128,6 @@
     {
       transform: rotate(-45deg) translate(0, -1px);
     }
-
     #menu
     {
       position: absolute;
@@ -157,12 +156,35 @@
     {
       transform: none;
     }
+    #searchToggle {
+      background: none;
+      border: 0px;
+    }
+    #searchModal .sn-search {
+      background: #d32f2f;
+      border: 1px solid #d32f2f;
+      border-radius: 4px;
+      color: #fff;
+      font-weight: bold;
+    }
+    #searchModal #searchTextkt {
+      width: 75%;
+      margin-right: 10px;
+      /* height: 38px; */
+      padding: 8px 20px;
+      border: 1px solid #bfbfbf;
+      border-radius: 3px;
+    }
+    #searchModal .modal-content{
+      top: -50px;
+    }
   </style>
 @endpush
 @php
   $count = isset(Auth::user()->id) ? App\Models\Addtocart::where('user_id',Auth::user()->id)->sum('count') : '';
 @endphp
 <header class="main-nav container-lg p-0">
+  {{-- Desktop --}}
   <nav class="d-none d-lg-block py-3">
     <ul class="d-flex justify-content-between align-items-center p-0 mb-0">
         <li class="{{ (request()->is('/')) ? 'active' : '' }} me-3"><a href="{{ url('/') }}">Home</a></li>
@@ -176,7 +198,11 @@
         </li>
         <li class="{{ (request()->is('contact')) ? 'active' : '' }} me-3"><a href="{{url('contact')}}">Contact</a></li>
         <li class="{{ (request()->is('account')) ? 'active' : '' }} me-3"><a href="{{url('account')}}">Account</a></li>
-        <li class=""><a href="#"><img src="{{ asset('images/icons/search.svg')}}" alt="" class="search"></a></li>
+        <li class="position-relative">
+          <button id="searchToggle" type="button" data-bs-toggle="modal" data-bs-target="#searchModal">
+            <img src="{{ asset('images/icons/search.svg')}}" alt="" class="search">
+          </button>
+        </li>
         <li class="position-relative">
           <a href="{{ url('/addtocart') }}">
             <img src="{{ asset('images/icons/cart.svg')}}" alt="" class="cart">
@@ -185,6 +211,28 @@
         </li>
       </ul>
   </nav>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div id="SearchPanel">
+            <form action="" id="searchform" class="d-flex justify-content-center">
+              <input class="" type="text" id="searchTextkt" placeholder="Search" value="">
+              <button class="sn-search" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End of Modal -->
+
+  {{-- Mobile --}}
   <nav class="mobile-main-nav d-block d-lg-none p-4">
     <div class="d-flex justify-content-between align-items-center">
       <div class="d-flex align-items-center">
@@ -212,7 +260,10 @@
         <a href="/"><h3 class="mb-0">KATHIT</h3></a>
       </div>
       <div class="d-flex align-items-center">
-        <div class="me-3"><a href="#"><img src="{{ asset('images/icons/search.svg')}}" alt="" class="search"></a></div>
+        <div class="me-3">
+          <button id="searchToggle" type="button" data-bs-toggle="modal" data-bs-target="#searchModal">
+            <img src="{{ asset('images/icons/search.svg')}}" alt="" class="search">
+          </button></div>
         <div class="position-relative">
           <a href="{{ url('/addtocart') }}"><img src="{{ asset('images/icons/cart.svg')}}" alt="" class="cart"></a>
           <span class="position-absolute" style="top: -12px;">{{ $count }}</span>
@@ -221,3 +272,20 @@
     </div>
   </nav>
 </header>
+
+@push('scripts')
+  <script>
+    
+    if(window.localStorage.getItem('searchTextkt') != undefined){
+      $('#searchTextkt').val(window.localStorage.getItem('searchTextkt'));
+    }else{
+      $('#searchTextkt').val('');
+    }
+    $("#searchform").submit(function (event) {
+      var inputval = $('#searchTextkt').val();
+      window.localStorage.setItem('searchTextkt',inputval);
+      event.preventDefault();
+      return location.assign("{{url('products')}}" + '/' + inputval);
+    });
+  </script>
+@endpush
