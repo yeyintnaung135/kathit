@@ -8,8 +8,9 @@
     .founder img {
       width: 125px;
       position: absolute;
-      top: -17px;
-      right: -12px;
+      /* top: -17px; */
+      right: -2px;
+      border-radius: 50%;
     }
     .founder-bg {
       width: 120px;
@@ -154,10 +155,10 @@
           <div class="col-12 col-lg-3 mb-4 mb-lg-0">
             <div class="row text-center">
               <div class="col-5 col-lg-12 position-relative founder-bg">
-                <img src="{{ url('/images/icons/founder.png') }}" alt="Kathit" class="">
+                <img src="{{ url('/images/directors/kathit.jpg') }}" alt="Kathit" class="">
               </div>
               <div class="col-7 col-lg-12 ">
-                <h4 class="name mt-0 mt-lg-3">နှောင်းသွေး</h4>
+                <h4 class="name mt-0 mt-lg-3">Ka Thit</h4>
                 <h4 class="position my-2">CEO / FOUNDER</h4>
                 <span>(Fashion Designer)</span>
               </div>
@@ -243,28 +244,28 @@
             <div class="col-6 col-md-3">
               <div class="director-cart">
                 <img src="{{ url('images/directors/1.png') }}" alt="">
-                <h5>Name</h5>
+                <h5>မနီလာအောင်</h5>
                 <p class="mb-0">CEO & Director</p>
               </div>
             </div>
             <div class="col-6 col-md-3">
               <div class="director-cart">
                 <img src="{{ url('images/directors/2.png') }}" alt="">
-                <h5>Name</h5>
+                <h5>မစံစံစိုးရှိန်</h5>
                 <p class="mb-0">CEO & Director</p>
               </div>
             </div>
             <div class="col-6 col-md-3">
               <div class="director-cart">
                 <img src="{{ url('images/directors/3.png') }}" alt="">
-                <h5>Name</h5>
+                <h5>မဆုသက်လျာ</h5>
                 <p class="mb-0">CEO & Director</p>
               </div>
             </div>
             <div class="col-6 col-md-3">
               <div class="director-cart">
                 <img src="{{ url('images/directors/4.png') }}" alt="">
-                <h5>Name</h5>
+                <h5>မအေးမြခိုင်</h5>
                 <p class="mb-0">CEO & Director</p>
               </div>
             </div>
