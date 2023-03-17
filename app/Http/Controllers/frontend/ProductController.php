@@ -31,7 +31,12 @@ class ProductController extends Controller
       $products = Product::where(function ($query) use ($searchtext) {
                     $query->where('brand_code', 'like', '%' . $searchtext . '%')
                       ->orWhere('name', 'like', '%' . $searchtext . '%')
-                      ->orWhere('price', 'like', '%' . $searchtext . '%')
+                      ->orWhere('customize_price', 'like', '%' . $searchtext . '%')
+                      ->orWhere('s_price', 'like', '%' . $searchtext . '%')
+                      ->orWhere('m_price', 'like', '%' . $searchtext . '%')
+                      ->orWhere('l_price', 'like', '%' . $searchtext . '%')
+                      ->orWhere('xl_price', 'like', '%' . $searchtext . '%')
+                      ->orWhere('xxl_price', 'like', '%' . $searchtext . '%')
                       ->orWhere('short_desc', 'like', '%' . $searchtext . '%')
                       ->orWhere('description', 'like', '%' . $searchtext . '%');
                   })->latest()->paginate(8);
@@ -49,7 +54,12 @@ class ProductController extends Controller
           $products = Product::where(function ($query) use ($searchtext) {
                         $query->where('brand_code', 'like', '%' . $searchtext . '%')
                           ->orWhere('name', 'like', '%' . $searchtext . '%')
-                          ->orWhere('price', 'like', '%' . $searchtext . '%')
+                          ->orWhere('customize_price', 'like', '%' . $searchtext . '%')
+                          ->orWhere('s_price', 'like', '%' . $searchtext . '%')
+                          ->orWhere('m_price', 'like', '%' . $searchtext . '%')
+                          ->orWhere('l_price', 'like', '%' . $searchtext . '%')
+                          ->orWhere('xl_price', 'like', '%' . $searchtext . '%')
+                          ->orWhere('xxl_price', 'like', '%' . $searchtext . '%')
                           ->orWhere('short_desc', 'like', '%' . $searchtext . '%')
                           ->orWhere('description', 'like', '%' . $searchtext . '%');
                       })->latest()->paginate(8);
@@ -59,27 +69,46 @@ class ProductController extends Controller
           $products = Product::where(function ($query) use ($searchtext) {
                         $query->where('brand_code', 'like', '%' . $searchtext . '%')
                           ->orWhere('name', 'like', '%' . $searchtext . '%')
-                          ->orWhere('price', 'like', '%' . $searchtext . '%')
+                          ->orWhere('customize_price', 'like', '%' . $searchtext . '%')
+                          ->orWhere('s_price', 'like', '%' . $searchtext . '%')
+                          ->orWhere('m_price', 'like', '%' . $searchtext . '%')
+                          ->orWhere('l_price', 'like', '%' . $searchtext . '%')
+                          ->orWhere('xl_price', 'like', '%' . $searchtext . '%')
+                          ->orWhere('xxl_price', 'like', '%' . $searchtext . '%')
                           ->orWhere('short_desc', 'like', '%' . $searchtext . '%')
                           ->orWhere('description', 'like', '%' . $searchtext . '%');
-                      })->orderBy('price','asc')->paginate(8);
+                      })->orderByRaw(
+                            "CASE WHEN customize_price THEN customize_price ELSE s_price END ASC"
+                      )->paginate(8);
         }
         elseif($sort_type == 4)
         {
           $products = Product::where(function ($query) use ($searchtext) {
                         $query->where('brand_code', 'like', '%' . $searchtext . '%')
                           ->orWhere('name', 'like', '%' . $searchtext . '%')
-                          ->orWhere('price', 'like', '%' . $searchtext . '%')
+                          ->orWhere('customize_price', 'like', '%' . $searchtext . '%')
+                          ->orWhere('s_price', 'like', '%' . $searchtext . '%')
+                          ->orWhere('m_price', 'like', '%' . $searchtext . '%')
+                          ->orWhere('l_price', 'like', '%' . $searchtext . '%')
+                          ->orWhere('xl_price', 'like', '%' . $searchtext . '%')
+                          ->orWhere('xxl_price', 'like', '%' . $searchtext . '%')
                           ->orWhere('short_desc', 'like', '%' . $searchtext . '%')
                           ->orWhere('description', 'like', '%' . $searchtext . '%');
-                      })->orderBy('price','desc')->paginate(8);
+                      })->orderByRaw(
+                            "CASE WHEN customize_price THEN customize_price ELSE s_price END DESC"
+                      )->paginate(8);
         }
         else
         {
           $products = Product::where(function ($query) use ($searchtext) {
                         $query->where('brand_code', 'like', '%' . $searchtext . '%')
                           ->orWhere('name', 'like', '%' . $searchtext . '%')
-                          ->orWhere('price', 'like', '%' . $searchtext . '%')
+                          ->orWhere('customize_price', 'like', '%' . $searchtext . '%')
+                          ->orWhere('s_price', 'like', '%' . $searchtext . '%')
+                          ->orWhere('m_price', 'like', '%' . $searchtext . '%')
+                          ->orWhere('l_price', 'like', '%' . $searchtext . '%')
+                          ->orWhere('xl_price', 'like', '%' . $searchtext . '%')
+                          ->orWhere('xxl_price', 'like', '%' . $searchtext . '%')
                           ->orWhere('short_desc', 'like', '%' . $searchtext . '%')
                           ->orWhere('description', 'like', '%' . $searchtext . '%');
                       })->latest()->paginate(8);
@@ -106,11 +135,16 @@ class ProductController extends Controller
         }
         elseif($sort_type == 3)
         {
-          $products = Product::where('category_id',$request->cate_id)->orderBy('price','asc')->paginate(8);
+          $products = Product::where('category_id',$request->cate_id)
+          ->orderByRaw(
+                "CASE WHEN customize_price THEN customize_price ELSE s_price END ASC"
+          )->paginate(8);
         }
         elseif($sort_type == 4)
         {
-          $products = Product::where('category_id',$request->cate_id)->orderBy('price','desc')->paginate(8);
+          $products = Product::where('category_id',$request->cate_id)->orderByRaw(
+                "CASE WHEN customize_price THEN customize_price ELSE s_price END DESC"
+          )->paginate(8);
         }
         else
         {
@@ -123,9 +157,22 @@ class ProductController extends Controller
     public function product_detail($id) {
       $data = Product::findOrFail($id);
 
-      $min = $data->price - (($data->price * 20) / 100);
-      $max = $data->price + (($data->price * 20) / 100);
-      $sim = Product::where('price', '>=', $min)->where('price', '<=', $max)->where('category_id', $data->category_id)->where('id', '!=', $data->id)->orderBy('price', 'asc')->limit(10)->get();
+      $min = $data->customize_price ? $data->customize_price - (($data->customize_price * 20) / 100) : $data->s_price - (($data->s_price * 20) / 100);
+      $max = $data->customize_price ? $data->customize_price + (($data->customize_price * 20) / 100) : $data->xxl_price - (($data->xxl_price * 20) / 100);
+      $sim = Product::
+              where(function ($query) use ($min, $max) {
+                $query->where('customize_price', '>=', $min)
+                      ->where('customize_price', '<=', $max);
+              })
+              ->orWhere(function ($query) use ($min, $max) {
+                $query->where('s_price', '>=', $min)
+                      ->where('xxl_price', '<=', $max);
+              })
+             ->where('category_id', $data->category_id)->where('id', '!=', $data->id)
+             ->orderByRaw(
+                  "CASE WHEN customize_price THEN customize_price ELSE s_price END ASC"
+             )
+             ->limit(10)->get();
       
       $colors = Color::whereIn('id', json_decode($data->color))->get();
 

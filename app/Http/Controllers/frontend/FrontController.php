@@ -27,6 +27,8 @@ class FrontController extends Controller
      */
     public function index()
     {
+      // Product::where('type', 'customize')->update(['type'=>'["customize"]']);
+      // Product::where('type', 'readytowear')->update(['type'=>'["readytowear"]']);
       $all_products = Product::orderBy('created_at', 'desc')->take(6)->get();
       $dresses = Product::where('category_id', '1')->orderBy('created_at', 'desc')->take(6)->get();
       $mm_dresses = Product::where('category_id', '2')->orderBy('created_at', 'desc')->take(6)->get();

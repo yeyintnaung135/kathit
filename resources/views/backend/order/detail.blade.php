@@ -85,7 +85,7 @@
                                 </a>
                                 x {{ $order->count }}
                               </td>
-                              <td class="border">{{ $order->product->price * $order->count }} Ks</td>
+                              <td class="border">{{ $order->price_per_product * $order->count }} Ks</td>
                             </tr>
                           @endforeach
                           <tr>
@@ -126,7 +126,7 @@
                                   $dress = App\Models\OrderDressCustomize::where('user_id', $payment->user_id)->where('product_id', $order->product_id)->where('payment_id', $payment->id)->first();
                                   $suit = App\Models\OrderSuitCustomize::where('user_id', $payment->user_id)->where('product_id', $order->product_id)->where('payment_id', $payment->id)->first();
                                 @endphp
-                                @if ($dress)
+                                {{-- @if ($dress) --}}
                                   <li class="my-1 border-top pt-3 mt-3">
                                     <h6 class="mb-3">Dress Size</h6>
                                     <p><span class="highlight">Shoulder : </span>{{ $dress->shoulder }} {{ $dress->measurement }}</p>
@@ -139,7 +139,7 @@
                                     <p><span class="highlight">Length : </span>{{ $dress->length }} {{ $dress->measurement }}</p>
                                     <p class="mb-0"><span class="highlight">Waist to Floor : </span>{{ $dress->waist_to_floor }} {{ $dress->measurement }}</p>
                                   </li>
-                                @endif
+                                {{-- @endif --}}
                                 @if ($suit)
                                   <li class="my-1 border-top pt-3 mt-3">
                                     <h6 class="mb-3">Suit Size</h6>

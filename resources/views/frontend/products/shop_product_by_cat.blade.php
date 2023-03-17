@@ -5,7 +5,7 @@
         <img src="{{ asset($product->getProductPhotos[0]->product_image)}}" alt="" class="product-img">
       </div>
       <h5 class="product-name">{{ $product->name }}</h5>
-      <span class="product-price">{{ $product->price }} MMK</span>
+      <span class="product-price">{{ $product->customize_price ? $product->customize_price : $product->s_price .' MMK to '. $product->xxl_price }} MMK</span>
     </a>
     {{-- <button class="add-to-cart">+</button> --}}
   </div>

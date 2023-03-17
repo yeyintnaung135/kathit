@@ -29,13 +29,13 @@
                   </tr>
                   @php $total = 0 @endphp
                   @foreach ( $products as $product )
-                  @php $total += $product->count * $product->price @endphp
+                  @php $total += $product->count * $product->price_per_product @endphp
                     <tr>
                       <td class="img-td">
                         <img src="{{url(App\Models\ProductPhoto::where('product_id', $product->product_id)->value('product_image'))}}" alt="" class="product-img me-0 me-lg-3">
                       </td>
                       <td>
-                        <p class="mb-0 highlight"><a href="{{ url('/product/detail/'.$product->product_id) }}">{{ $product->name }}</a></p>
+                        <p class="mb-0 highlight"><a href="{{ url('/product/detail/'.$product->product_id) }}">{{ $product->name }}</a> {{ $product->readytowear_size ? '( ' . $product->readytowear_size . ' )' : '' }}</p>
                       </td>
                       <td>
                         <div class="d-flex">
@@ -44,7 +44,7 @@
                           <button class="countminus" onclick="countminus({{ $product->id }})"> - </button>
                         </div>
                       </td>
-                      <td class="highlight">{{ $product->count * $product->price }} MMK</td>
+                      <td class="highlight">{{ $product->count * $product->price_per_product }} MMK</td>
                     </tr>
                   @endforeach
                 </tbody>

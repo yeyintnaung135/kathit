@@ -5,6 +5,9 @@ namespace App\Http\Controllers\backend;
 use App\Models\Product;
 use App\Models\ProductPhoto;
 use App\Models\Color;
+use App\Models\Addtocart;
+use App\Models\OrderDressCustomize;
+use App\Models\OrderSuitCustomize;
 
 use App\Admins;
 use Illuminate\Http\Request;
@@ -30,24 +33,49 @@ class ProductsController extends Controller
     }
 
     public function store(Request $request){
-      
       $request->validate([
-        'name'=>['required','max:1000'],
-        'brand_code'=>['required','max:1000'],
-        'product_image'=>['required'],
-        'price'=>['required','integer'],
-        'short_desc'=>['required'],
-        'description'=>['required']
+        'type'=>['required'],
       ]);
+      if(in_array('readytowear', $request->type)) {
+        $request->validate([
+          'name'=>['required','max:1000'],
+          'type'=>['required'],
+          'brand_code'=>['required','max:1000'],
+          'product_image'=>['required'],
+          's_price'=>['required','integer'],
+          'm_price'=>['required','integer'],
+          'l_price'=>['required','integer'],
+          'xl_price'=>['required','integer'],
+          'xxl_price'=>['required','integer'],
+          'short_desc'=>['required'],
+          'description'=>['required']
+        ]);
+      }
+      if(in_array('customize', $request->type)) {
+        $request->validate([
+          'name'=>['required','max:1000'],
+          'type'=>['required'],
+          'brand_code'=>['required','max:1000'],
+          'product_image'=>['required'],
+          'customize_price'=>['required','integer'],
+          'short_desc'=>['required'],
+          'description'=>['required']
+        ]);
+      }
 
       $product = new Product();
       $product->name = $request->name;
-      $product->price = $request->price;
+      $product->customize_price = $request->customize_price;
+      $product->s_price = $request->s_price;
+      $product->m_price = $request->m_price;
+      $product->l_price = $request->l_price;
+      $product->xl_price = $request->xl_price;
+      $product->xxl_price = $request->xxl_price;
       $product->brand_code = $request->brand_code;
       $product->category_id = $request->category_id;
       $product->short_desc = $request->short_desc;
       $product->description = $request->description;
-      $product->type = $request->type;
+      $product->type = json_encode($request->type);
       $product->color = $request->color;
       $product->save();
 
@@ -108,7 +136,12 @@ class ProductsController extends Controller
                       ->where(function ($query) use ($searchValue) {
                         $query->where('brand_code', 'like', '%' . $searchValue . '%')
                             ->orWhere('name', 'like', '%' . $searchValue . '%')
-                            ->orWhere('price', 'like', '%' . $searchValue . '%')
+                            ->orWhere('customize_price', 'like', '%' . $searchValue . '%')
+                            ->orWhere('s_price', 'like', '%' . $searchValue . '%')
+                            ->orWhere('m_price', 'like', '%' . $searchValue . '%')
+                            ->orWhere('l_price', 'like', '%' . $searchValue . '%')
+                            ->orWhere('xl_price', 'like', '%' . $searchValue . '%')
+                            ->orWhere('xxl_price', 'like', '%' . $searchValue . '%')
                             ->orWhere('short_desc', 'like', '%' . $searchValue . '%')
                             ->orWhere('description', 'like', '%' . $searchValue . '%');
                       })
@@ -120,7 +153,12 @@ class ProductsController extends Controller
           ->where(function ($query) use ($searchValue) {
               $query->where('brand_code', 'like', '%' . $searchValue . '%')
                   ->orWhere('name', 'like', '%' . $searchValue . '%')
-                  ->orWhere('price', 'like', '%' . $searchValue . '%')
+                  ->orWhere('customize_price', 'like', '%' . $searchValue . '%')
+                  ->orWhere('s_price', 'like', '%' . $searchValue . '%')
+                  ->orWhere('m_price', 'like', '%' . $searchValue . '%')
+                  ->orWhere('l_price', 'like', '%' . $searchValue . '%')
+                  ->orWhere('xl_price', 'like', '%' . $searchValue . '%')
+                  ->orWhere('xxl_price', 'like', '%' . $searchValue . '%')
                   ->orWhere('short_desc', 'like', '%' . $searchValue . '%')
                   ->orWhere('description', 'like', '%' . $searchValue . '%');
           })
@@ -137,7 +175,7 @@ class ProductsController extends Controller
               "brand_code" => $record->brand_code,
               "name" => $record->name,
               "product_image" => $record->getProductPhotos[0]->product_image,
-              "price" => $record->price,
+              "price" => $record->customize_price ? $record->customize_price : $record->s_price . ' - ' . $record->xxl_price,
               "created_at" => date('F d, Y', strtotime($record->created_at)),
               "id" => $record->id,
           );
@@ -160,21 +198,46 @@ class ProductsController extends Controller
 
     public function update(Request $request, $id) {
       $request->validate([
-        'name'=>['required','max:1000'],
-        'price'=>['required','integer'],
-        'brand_code'=>['required','max:1000'],
-        'short_desc'=>['required'],
-        'description'=>['required']
+        'type'=>['required'],
       ]);
+      if(in_array('readytowear', $request->type)) {
+        $request->validate([
+          'name'=>['required','max:1000'],
+          'type'=>['required'],
+          's_price'=>['required','integer'],
+          'm_price'=>['required','integer'],
+          'l_price'=>['required','integer'],
+          'xl_price'=>['required','integer'],
+          'xxl_price'=>['required','integer'],
+          'brand_code'=>['required','max:1000'],
+          'short_desc'=>['required'],
+          'description'=>['required']
+        ]);
+      }
+      if(in_array('customize', $request->type)) {
+        $request->validate([
+          'name'=>['required','max:1000'],
+          'type'=>['required'],
+          'customize_price'=>['required','integer'],
+          'brand_code'=>['required','max:1000'],
+          'short_desc'=>['required'],
+          'description'=>['required']
+        ]);
+      }
 
       $product = Product::findOrFail($id);
       $product->name = $request->name;
-      $product->price = $request->price;
+      $product->customize_price = $request->customize_price;
+      $product->s_price = $request->s_price;
+      $product->m_price = $request->m_price;
+      $product->l_price = $request->l_price;
+      $product->xl_price = $request->xl_price;
+      $product->xxl_price = $request->xxl_price;
       $product->brand_code = $request->brand_code;
       $product->category_id = $request->category_id;
       $product->short_desc = $request->short_desc;
       $product->description = $request->description;
-      $product->type = $request->type;
+      $product->type = json_encode($request->type);
       $product->color = $request->color;
       $product->save();
 
@@ -221,6 +284,11 @@ class ProductsController extends Controller
     public function destroy($id)
     {
       Product::findOrFail($id)->delete();
+      
+      Addtocart::where('product_id', $id)->delete();
+      OrderDressCustomize::where('product_id', $id)->whereNull('payment_id')->delete();
+      OrderSuitCustomize::where('product_id', $id)->whereNull('payment_id')->delete();
+
       Session::flash('message', 'Your product was successfully deleted');
       return redirect(url('backend/product/list'));
     }

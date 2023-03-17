@@ -13,6 +13,7 @@ class OrderProduct extends Model
         'product_id',
         'payment_id',
         'count',
+        'price_per_product',
         'color_id',
         'readytowear_size'
     ];

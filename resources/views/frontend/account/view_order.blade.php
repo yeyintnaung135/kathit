@@ -38,7 +38,7 @@
                         </a>
                         x {{ $order->count }}
                       </td>
-                      <td class="border">{{ $order->product->price * $order->count }} Ks</td>
+                      <td class="border">{{ $order->price_per_product * $order->count }} Ks</td>
                     </tr>
                   @endforeach
                   <tr>

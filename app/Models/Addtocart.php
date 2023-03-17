@@ -9,6 +9,6 @@ class Addtocart extends Model
 {
     protected $table = 'addtocart';
     protected $fillable = [
-      'user_id', 'product_id', 'color_id', 'readytowear_size', 'order_dress_customize_id', 'order_suit_customize_id', 'count',
+      'user_id', 'product_id', 'color_id', 'readytowear_size', 'order_dress_customize_id', 'order_suit_customize_id', 'count','price_per_product'
     ]; 
 }

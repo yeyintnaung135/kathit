@@ -14,7 +14,12 @@ class Product extends Model
     protected $table = 'products';
     protected $fillable = [
         'name',
-        'price',
+        'customize_price',
+        's_price',
+        'm_price',
+        'l_price',
+        'xl_price',
+        'xxl_price',
         'brand_code',
         'category_id',
         'short_desc',
@@ -28,12 +33,4 @@ class Product extends Model
     {
         return $this->hasMany(ProductPhoto::class,'product_id');
     }
-    // public function category() {
-    //     return $this->belongsTo('App\Categories','category_id');
-    // }
-    // public function discount() {
-    //   return $this->hasOne('App\Discount','product_id');
-    // }
-
-
 }

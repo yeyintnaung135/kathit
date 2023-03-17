@@ -141,12 +141,19 @@ class AccountController extends Controller
       }
     }
 
+    public function customizewithdata(Request $request) {
+      Session::put('selected_color', $request->selected_color);
+      Session::put('price_per_product', $request->price_per_product);
+      return redirect('/customize/'.$request->product_id);
+    }
+
     public function customize($id) {
       if(Auth::check() and Auth::user()->role='user') {
         $dress = DressCustomize::where('user_id', Auth::user()->id)->first();
         $suit = SuitCustomize::where('user_id', Auth::user()->id)->first();
 
-        return view('frontend.account.customize', ['user_id' => Auth::user()->id, 'product_id' => $id, 'dress' => $dress, 'suit' => $suit]);
+        // return view('frontend.account.customize', ['user_id' => Auth::user()->id, 'product_id' => $id, 'dress' => $dress, 'suit' => $suit]);
+        return view('frontend.account.customize', ['user_id' => Auth::user()->id, 'product_id' => $id, 'dress' => $dress, 'suit' => $suit, 'color' => Session::get('selected_color'), 'price_per_product' => Session::get('price_per_product')]);
       } else {
         session()->put('product_id', $id);
         return redirect('/login');
@@ -211,13 +218,13 @@ class AccountController extends Controller
 
         // Ready to Wear
         if($request->readytowear_size) {
-          if($qty) {
-            $count = $qty->count + $request->qty;
-            Addtocart::where('user_id', Auth::user()->id)->where('product_id', $request->product_id)->update(['count' => $count]);
-          } else {
+          // if($qty) {
+          //   $count = $qty->count + $request->qty;
+          //   Addtocart::where('user_id', Auth::user()->id)->where('product_id', $request->product_id)->update(['count' => $count]);
+          // } else {
             $count = $request->qty;
-            Addtocart::create(['user_id' => Auth::user()->id,'product_id' => $request->product_id,'color_id' => $request->color,'readytowear_size' => $request->readytowear_size,'count' => $request->qty]);
-          }
+            Addtocart::create(['user_id' => Auth::user()->id,'product_id' => $request->product_id,'color_id' => $request->color,'readytowear_size' => $request->readytowear_size,'count' => $request->qty, 'price_per_product' => $request->price_per_product]);
+          // }
           return response()->json(['count' => $count]);
         } 
         // Customize
@@ -290,7 +297,8 @@ class AccountController extends Controller
                 'color_id' => $request->color,
                 'order_dress_customize_id' => isset($orderdress->id) ? $orderdress->id : NULL,
                 'order_suit_customize_id' => isset($ordersuit->id) ? $ordersuit->id : NULL,
-                'count' => $request->qty
+                'count' => $request->qty,
+                'price_per_product' => $request->price_per_product
               ]);
             } else {
               return response()->json(['error' => 'needtocustomize', 'product_id' => $request->product_id]);
@@ -381,6 +389,7 @@ class AccountController extends Controller
           'product_id' => $atc->product_id,
           'payment_id' => $payment->id,
           'count' => $atc->count,
+          'price_per_product' => $atc->price_per_product,
           'color_id' => $atc->color_id,
           'readytowear_size' => $atc->readytowear_size,
         ];

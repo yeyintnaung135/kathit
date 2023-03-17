@@ -48,6 +48,7 @@ Route::group(['middleware' => ['web']], function () {
   Route::post('/account/change-password', [AccountController::class,'editchangepassword']);
   
   Route::get('/customize/{id}', [AccountController::class,'customize']);
+  Route::post('/customize', [AccountController::class,'customizewithdata']);
   Route::post('/dresscustomize', [DressCustomizeController::class, 'dresscustomize']);
   Route::post('/suitcustomize', [SuitCustomizeController::class, 'suitcustomize']);
   

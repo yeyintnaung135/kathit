@@ -285,7 +285,7 @@
                   <img src="{{ asset($all->getProductPhotos[0]->product_image)}}" alt="" class="product-img">
                 </div>
                 <h5 class="product-name">{{ $all->name }}</h5>
-                <span class="product-price">{{ $all->price }} MMK</span>
+                <span class="product-price">{{ $all->customize_price ? $all->customize_price : $all->s_price .' MMK to '. $all->xxl_price }} MMK</span>
               </a>
             @endforeach
           </div>
@@ -298,7 +298,7 @@
                   <img src="{{ asset($dress->getProductPhotos[0]->product_image)}}" alt="" class="product-img">
                 </div>
                 <h5 class="product-name">{{ $dress->name }}</h5>
-                <span class="product-price">{{ $dress->price }} MMK</span>
+                <span class="product-price">{{ $dress->customize_price ? $dress->customize_price : $dress->s_price .' MMK to '. $dress->xxl_price }} MMK</span>
               </a>
             @endforeach
           </div>
@@ -311,7 +311,7 @@
                   <img src="{{ asset($mm_dress->getProductPhotos[0]->product_image)}}" alt="" class="product-img">
                 </div>
                 <h5 class="product-name">{{ $mm_dress->name }}</h5>
-                <span class="product-price">{{ $mm_dress->price }} MMK</span>
+                <span class="product-price">{{ $mm_dress->customize_price ? $mm_dress->customize_price : $mm_dress->s_price .' MMK to '. $mm_dress->xxl_price }} MMK</span>
               </a>
             @endforeach
           </div>  
@@ -324,7 +324,7 @@
                   <img src="{{ asset($men_wear->getProductPhotos[0]->product_image)}}" alt="" class="product-img">
                 </div>
                 <h5 class="product-name">{{ $men_wear->name }}</h5>
-                <span class="product-price">{{ $men_wear->price }} MMK</span>
+                <span class="product-price">{{ $men_wear->customize_price ? $men_wear->customize_price : $men_wear->s_price .' MMK to '. $men_wear->xxl_price }} MMK</span>
               </a>
             @endforeach
           </div>
@@ -337,7 +337,7 @@
                   <img src="{{ asset($women_wear->getProductPhotos[0]->product_image)}}" alt="" class="product-img">
                 </div>
                 <h5 class="product-name">{{ $women_wear->name }}</h5>
-                <span class="product-price">{{ $women_wear->price }} MMK</span>
+                <span class="product-price">{{ $women_wear->customize_price ? $women_wear->customize_price : $women_wear->s_price .' MMK to '. $women_wear->xxl_price }} MMK</span>
               </a>
             @endforeach
           </div>

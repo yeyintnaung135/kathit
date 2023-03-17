@@ -148,7 +148,7 @@
         { responsivePriority: 3, targets: 3},
         { responsivePriority: 4, targets: 4},
         {
-          'targets': [5],
+          'targets': [3,5],
           'orderable': false,
         }
       ],

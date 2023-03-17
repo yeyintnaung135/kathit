@@ -36,10 +36,13 @@
                 </div>
                 <div class="col-12 col-lg-4">
                   <h4 class="mt-4 mt-lg-0">Customize Your Dress</h4>
+                  <h5 class="highlight mt-3">{{ $price_per_product }} MMK</h5>
                   <form method="post" action="{{ url('/dresscustomize') }}" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="user_id" value="{{ $user_id }}">
                     <input type="hidden" name="product_id" value="{{ $product_id }}">
+                    <input type="hidden" name="color" value="{{ $color }}">
+                    <input type="hidden" name="price_per_product" value="{{ $price_per_product }}">
                     <div class="d-flex align-items-baseline measurement mb-3 mt-4">
                       <label for="measurement">
                         <span style="color: red;">*</span> Measuring by
@@ -86,7 +89,7 @@
                       <input type="text" name="waist_to_floor" id="waist_to_floor" value="{{old('waist_to_floor',isset($dress->waist_to_floor) ? $dress->waist_to_floor : '')}}" placeholder="Fill your waist to floor length" required>
                     </div>
                     <button type="submit" class="form-submit">
-                      SAVE
+                      Place Order
                     </button>
                   </form>
                 </div>
@@ -99,12 +102,15 @@
                     @csrf
                     <input type="hidden" name="user_id" value="{{ $user_id }}">
                     <input type="hidden" name="product_id" value="{{ $product_id }}">
+                    <input type="hidden" name="color" value="{{ $color }}">
+                    <input type="hidden" name="price_per_product" value="{{ $price_per_product }}">
                     <div class="row">
                       <div class="col-12 col-lg-8">
                         <img src="{{ url('/images/sizeguide/Suite-Upperbody.png') }}" alt="" class="suit-img mt-0 mt-lg-5">
                       </div>
                       <div class="col-12 col-lg-4">
                         <h4 class="mt-4 mt-lg-0">Customize Your Suit</h4>
+                        <h5 class="highlight mt-3">{{ $price_per_product }} MMK</h5>
                         <div class="d-flex align-items-baseline measurement mb-3 mt-4">
                           <label for="measurement">
                             <span style="color: red;">*</span> Measuring by
@@ -167,7 +173,7 @@
                           <input type="text" name="inseam" id="inseam" value="{{old('inseam',isset($suit->inseam) ? $suit->inseam : '')}}" placeholder="Fill your inseam size" required>
                         </div>
                         <button type="submit" class="form-submit">
-                          SAVE
+                          Place Order
                         </button>
                       </div>
                     </div>
@@ -190,6 +196,10 @@
 
 @push('styles')
   <style>
+    .highlight {
+      color: #d32f2f;
+      font-weight: 900;
+    }
     #myTab button {
       padding: 10px 20px;
       border: none;

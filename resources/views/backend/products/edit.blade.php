@@ -132,9 +132,78 @@
                                       </div>
                                       <div class="col-12 col-md-6">
                                         <label>Product Type</label>
-                                        <select class="form-control" name="type">
-                                          <option value="readytowear" {{old('type',$data->type)=='readytowear' ? 'selected' : ''}}>Ready To Wear</option>
-                                          <option value="customize" {{old('type',$data->type)=='customize' ? 'selected' : ''}}>Customize</option>
+                                        <div class="d-flex mt-2">
+                                          <div class="form-check mr-4">
+                                            <input class="form-check-input" name="type" type="checkbox" value="readytowear" id="readytowear" {{ is_array(json_decode($data->type)) ? (in_array('readytowear', old('type',json_decode($data->type))) ? 'checked' : '') : '' }}>
+                                            <label class="form-check-label" for="readytowear">
+                                              Ready To Wear
+                                            </label>
+                                          </div>
+                                          <div class="form-check">
+                                            <input class="form-check-input" name="type" type="checkbox" value="customize" id="customize" {{ is_array(json_decode($data->type)) ? (in_array('customize', old('type',json_decode($data->type))) ? 'checked' : '') : '' }}>
+                                            <label class="form-check-label" for="customize">
+                                              Customize
+                                            </label>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="form-group row no-gutters">
+                                      <div class="col-12 col-md-6 pr-md-2 mb-3 readytowear-price d-none">
+                                          <label for="exampleInputEmail1">Small Price (Ks) <span style="color:red;font-size:13px;font-weight:bold;">*</span></label>
+                                          <input type="number" name="s_price"
+                                                class="form-control  @error('s_price') is-invalid @enderror "
+                                                id="exampleInputEmail1" value="{{old('s_price',$data->s_price)}}"
+                                                placeholder="Enter Small Price" required
+                                          >
+                                      </div>
+                                      <div class="col-12 col-md-6 pr-md-2 mb-3 readytowear-price d-none">
+                                          <label for="exampleInputEmail1">Medium Price (Ks) <span style="color:red;font-size:13px;font-weight:bold;">*</span></label>
+                                          <input type="number" name="m_price"
+                                                class="form-control  @error('m_price') is-invalid @enderror "
+                                                id="exampleInputEmail1" value="{{old('m_price',$data->m_price)}}"
+                                                placeholder="Enter Medium Price" required
+                                          >
+                                      </div>
+                                      <div class="col-12 col-md-6 pr-md-2 mb-3 readytowear-price d-none">
+                                          <label for="exampleInputEmail1">Large Price (Ks) <span style="color:red;font-size:13px;font-weight:bold;">*</span></label>
+                                          <input type="number" name="l_price"
+                                                class="form-control  @error('l_price') is-invalid @enderror "
+                                                id="exampleInputEmail1" value="{{old('l_price',$data->l_price)}}"
+                                                placeholder="Enter Large Price" required
+                                          >
+                                      </div>
+                                      <div class="col-12 col-md-6 pr-md-2 mb-3 readytowear-price d-none">
+                                          <label for="exampleInputEmail1">XL Price (Ks) <span style="color:red;font-size:13px;font-weight:bold;">*</span></label>
+                                          <input type="number" name="xl_price"
+                                                class="form-control  @error('xl_price') is-invalid @enderror "
+                                                id="exampleInputEmail1" value="{{old('xl_price',$data->xl_price)}}"
+                                                placeholder="Enter XL Price" required
+                                          >
+                                      </div>
+                                      <div class="col-12 col-md-6 pr-md-2 mb-3 readytowear-price d-none">
+                                          <label for="exampleInputEmail1">XXL Price (Ks) <span style="color:red;font-size:13px;font-weight:bold;">*</span></label>
+                                          <input type="number" name="xxl_price"
+                                                class="form-control  @error('xxl_price') is-invalid @enderror "
+                                                id="exampleInputEmail1" value="{{old('xxl_price',$data->xxl_price)}}"
+                                                placeholder="Enter XXL Price" required
+                                          >
+                                      </div>
+                                      <div class="col-12 col-md-6 pr-md-2 mb-3 customize-price d-none">
+                                          <label for="exampleInputEmail1">Customize Price (Ks) <span style="color:red;font-size:13px;font-weight:bold;">*</span></label>
+                                          <input type="number" name="customize_price"
+                                                class="form-control  @error('customize_price') is-invalid @enderror "
+                                                id="exampleInputEmail1" value="{{old('customize_price',$data->customize_price)}}"
+                                                placeholder="Enter Customize Price" required
+                                          >
+                                      </div>
+                                      <div class="col-12 col-md-6">
+                                        <label>Category</label>
+                                        <select class="form-control" name="category_id">
+                                            <option value="1" {{ old('type',$data->category_id) == '1' ? 'selected' : '' }}>Dress</option>
+                                            <option value="2" {{ old('type',$data->category_id) == '2' ? 'selected' : '' }}>Myanmar Dress</option>
+                                            <option value="3" {{old('type',$data->category_id) == '3' ? 'selected' : '' }}>Men's Wear</option>
+                                            <option value="4" {{old('type',$data->category_id) == '4' ? 'selected' : '' }}>Women's Wear</option>
                                         </select>
                                       </div>
                                     </div>
@@ -201,27 +270,6 @@
                                           </div>
                                         </div>
                                         @endforeach
-                                      </div>
-                                    </div>
-                                    <div class="form-group row no-gutters">
-                                      <div class="col-12 col-md-6 pr-md-2">
-                                          <label for="exampleInputEmail1">Price (Ks) <span style="color:red;font-size:13px;font-weight:bold;">*</span></label>
-                                          <input type="number" name="price"
-                                                class="form-control  @error('price') is-invalid @enderror "
-                                                id="exampleInputEmail1" value="{{old('price',$data->price)}}"
-                                                placeholder="Enter Price" required
-                                          >
-
-
-                                      </div>
-                                      <div class="col-12 col-md-6">
-                                        <label>Category</label>
-                                        <select class="form-control" name="category_id">
-                                            <option value="1" {{ old('type',$data->category_id) == '1' ? 'selected' : '' }}>Dress</option>
-                                            <option value="2" {{ old('type',$data->category_id) == '2' ? 'selected' : '' }}>Myanmar Dress</option>
-                                            <option value="3" {{old('type',$data->category_id) == '3' ? 'selected' : '' }}>Men's Wear</option>
-                                            <option value="4" {{old('type',$data->category_id) == '4' ? 'selected' : '' }}>Women's Wear</option>
-                                        </select>
                                       </div>
                                     </div>
                                     <div class="form-group row no-gutters">
@@ -382,6 +430,7 @@
         $('#openColor > span').replaceWith(`<span>Select color</span>`);
       }
     }
+    
     $(function () {
       $("#openColor").click(function(){
         $(".sn-dropdown-state").toggleClass("d-none");
@@ -429,6 +478,20 @@
           ]
 
       })
+
+      if($('#readytowear').is(':checked')) {
+        $('.readytowear-price').removeClass("d-none");
+      }
+      if($('#customize').is(':checked')) {
+        $('.customize-price').removeClass("d-none");
+      }
+
+      $('#readytowear').click(function(){
+          $('.readytowear-price').toggleClass("d-none");
+      });
+      $('#customize').click(function(){
+          $('.customize-price').toggleClass("d-none");
+      });
 
       // CodeMirror
       CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
@@ -519,10 +582,21 @@
           product_image.push(pi.src);
         }
       });
+
+      var checkedValue = [];       
+      $("input:checkbox[name=type]:checked").each(function(){
+        checkedValue.push($(this).val());
+      });
+
       var formData = {
         name: jQuery("input[name=name]").val(),
-        type: jQuery("select[name=type]").val(),
-        price: jQuery("input[name=price]").val(),
+        type: checkedValue,
+        s_price: jQuery("input[name=s_price]").val(),
+        m_price: jQuery("input[name=m_price]").val(),
+        l_price: jQuery("input[name=l_price]").val(),
+        xl_price: jQuery("input[name=xl_price]").val(),
+        xxl_price: jQuery("input[name=xxl_price]").val(),
+        customize_price: jQuery("input[name=customize_price]").val(),
         brand_code: jQuery("input[name=brand_code]").val(),
         category_id: jQuery("select[name=category_id]").val(),
         color: jQuery("input[name=color]").val(),

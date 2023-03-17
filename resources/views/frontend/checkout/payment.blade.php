@@ -17,7 +17,7 @@
       <div class="container">
         @php $total = 0 @endphp
         @foreach ( $products as $product )
-          @php $total += $product->count * $product->price @endphp
+          @php $total += $product->count * $product->price_per_product @endphp
         @endforeach
         @if (count($products) != 0)
           <form class="row gx-lg-5" method="post" action="{{ url('/checkout') }}" enctype="multipart/form-data">
@@ -77,12 +77,6 @@
                   </div>
                   <div class="border-top py-4">
                     <p class="highlight">*Please Upload Your Screenshot Payment File</p>
-                    {{-- <div class="d-none">
-                      <label for="file-upload" class="custom-file-upload">
-                          <i class="fa fa-arrow-alt-circle-up me-2"></i>Upload
-                      </label>
-                      <input id="file-upload" type="file" hidden/>
-                    </div> --}}
                     <div>
                       @error('payment_screenshot')
                         <span style="color:red;font-size:13px;font-weight:bold;">{{ $message }}</span>
@@ -100,9 +94,9 @@
                   <div class="py-2 d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center">
                       <img src="{{url(App\Models\ProductPhoto::where('product_id', $product->product_id)->value('product_image'))}}" alt="" class="product-img me-2 me-lg-3">
-                      <p class="mb-0 highlight"><a href="{{ url('/product/detail/'.$product->product_id) }}">{{ $product->name }}</a> × {{ $product->count }}</p>
+                      <p class="mb-0 highlight"><a href="{{ url('/product/detail/'.$product->product_id) }}">{{ $product->name }}</a> {{ $product->readytowear_size ? '( ' . $product->readytowear_size . ' )' : '' }} × {{ $product->count }}</p>
                     </div>
-                    <p class="mb-0">{{ $product->count * $product->price }} MMK</p>
+                    <p class="mb-0">{{ $product->count * $product->price_per_product }} MMK</p>
                   </div>
                 @endforeach
                   <div class="py-4 d-flex justify-content-between border-bottom">
