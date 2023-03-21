@@ -21,8 +21,8 @@ class Contact extends Model
     public static function boot () {
       parent::boot();
       static::created(function ($item) {
-        // $adminEmail ="nyeinyadanartun.moe@gmail.com";
-        $adminEmail ="bebesofia047@gmail.com";
+        // $adminEmail ="bebesofia047@gmail.com";
+        $adminEmail ="Kathit.1976@gmail.com";
         Mail::to($adminEmail)->send(new ContactMail($item));
       });
     }

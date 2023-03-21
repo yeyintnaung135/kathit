@@ -52,11 +52,19 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+      if(is_numeric($data['email'])) {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+          'name' => ['required', 'string', 'max:255'],
+          'email' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10', 'unique:users'],
+          'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
+      } else {
+        return Validator::make($data, [
+          'name' => ['required', 'string', 'max:255'],
+          'email' => ['required', 'string', 'max:255', 'unique:users'],
+          'password' => ['required', 'string', 'min:8', 'confirmed'],
+      ]);
+      }
     }
 
     /**
@@ -67,11 +75,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+      if(is_numeric($data['email'])) {
+        $email = 'mobile_number';
+      } else {
+        $email = 'email';
+      }
+      return User::create([
+        'name' => $data['name'],
+        $email => $data['email'],
+        'password' => Hash::make($data['password']),
+      ]);
     }
 
     public function showAdminRegisterForm()

@@ -37,13 +37,27 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout','adminlogout');
-        $this->middleware('guest:admins')->except('logout','adminlogout');
+        $this->middleware('guest')->except('showAdminLoginForm','logout','adminlogout');
+        $this->middleware('guest:admins')->except('showAdminLoginForm', 'logout','adminlogout');
+    }
+
+    protected function credentials(Request $request)
+    {
+      if(is_numeric($request->get('email'))) {
+        return ['mobile_number' => $request->get('email'), 'password' => $request->get('password')];
+      } else {
+        return $request->only($this->username(), 'password');
+      }
     }
 
     public function showAdminLoginForm()
     {
+      if(Auth::guard('admins')->check()) {
+        return redirect()->intended('/backend/home');
+      } else {
         return view('auth.admin.login', ['url' => 'adminlogin']);
+      }
+        
     }
 
     public function adminLogin(Request $request)

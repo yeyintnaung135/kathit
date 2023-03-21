@@ -69,7 +69,8 @@ class FrontController extends Controller
       ContactMessage::create($input);
 
       // Mail::to('nyeinyadanartun.moe@gmail.com')->send(new ContactMail($input));
-      Mail::to('bebesofia047@gmail.com')->send(new ContactMail($input));
+      // Mail::to('bebesofia047@gmail.com')->send(new ContactMail($input));
+      Mail::to('Kathit.1976@gmail.com')->send(new ContactMail($input));
 
       Session::flash('message', 'Your message was successfully sent');
       return redirect(url('/contact'));

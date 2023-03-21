@@ -21,7 +21,7 @@
                   </div>
 
                   <div class="mb-3">
-                      <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email Address">
+                      <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email or Mobile Number">
 
                       @error('email')
                           <span class="invalid-feedback" role="alert">
@@ -29,6 +29,16 @@
                           </span>
                       @enderror
                   </div>
+
+                  {{-- <div class="mb-3">
+                      <input id="mobile_number" type="text" class="form-control @error('mobile_number') is-invalid @enderror" name="mobile_number" value="{{ old('mobile_number') }}" required autocomplete="mobile number" placeholder="Mobile Number">
+
+                      @error('mobile_number')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
+                  </div> --}}
 
                   <div class="mb-3">
                       <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
@@ -98,7 +108,8 @@
     .loginregistercontainer #email, 
     .loginregistercontainer #password,
     .loginregistercontainer #name,
-    .loginregistercontainer #password-confirm {
+    .loginregistercontainer #password-confirm,
+    .loginregistercontainer #mobile_number {
       background: #f3f3f3;
       border: 1px solid #f3f3f3;
       padding: 10px;

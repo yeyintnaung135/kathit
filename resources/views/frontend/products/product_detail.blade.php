@@ -62,10 +62,22 @@
                     </button>
                   </div>
                   <div class="w-50 ms-2">
-                    <a href="{{ url('/customize/'.$data->id) }}" class="w-100 d-flex justify-content-center align-items-center">
+                    {{-- <a href="{{ url('/customize/'.$data->id) }}" class="w-100 d-flex justify-content-center align-items-center">
                       <img src="{{ url('/images/icons/customize.png') }}" alt="customize" class="">
                       <p class="mb-0">Customize Your Size</p>
-                    </a>
+                    </a> --}}
+                    {{-- <div class="mt-3 mb-4 py-1 pd-cus"> --}}
+                      <form method="post" action="{{ url('/customize') }}" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{ $data->id }}">
+                        <input type="hidden" name="selected_color" value="{{ count($colors) > 0 ? $default_color : '' }}">
+                        <input type="hidden" name="price_per_product" value="{{ $data->customize_price }}">
+                        <button type="submit" class="w-100 d-flex justify-content-center align-items-center">
+                          <img src="{{ url('/images/icons/customize.png') }}" alt="customize" class="">
+                          <p class="mb-0">Customize Your Size</p>
+                        </button>
+                      </form>
+                    {{-- </div> --}}
                   </div>
                 </div>
                 <div class="mt-4 pt-1 pd-size d-none" id="readymade_panel">
@@ -135,17 +147,11 @@
             @endif
             @if (count(json_decode($data->type)) == 1 && in_array('customize', json_decode($data->type)))
               <h5 class="mb-0">Custom Size</h5>
-              <div class="mt-3 mb-4 py-1 pd-cus d-none">
-                <a href="{{ url('/customize/'.$data->id) }}" class="d-flex justify-content-between align-items-center align-self-center">
-                  <span>Customize Your Size and Place Order</span>
-                  <i class="fa fa-arrow-right float-end"></i>
-                </a>
-              </div>
               <div class="mt-3 mb-4 py-1 pd-cus">
                 <form method="post" action="{{ url('/customize') }}" enctype="multipart/form-data">
                   @csrf
                   <input type="hidden" name="product_id" value="{{ $data->id }}">
-                  <input type="hidden" name="selected_color" value="{{ $default_color }}">
+                  <input type="hidden" name="selected_color" value="{{ count($colors) > 0 ? $default_color : '' }}">
                   <input type="hidden" name="price_per_product" value="{{ $data->customize_price }}">
                   <button type="submit" class="d-flex justify-content-between align-items-center align-self-center">
                     <span class="me-3">Customize Your Size and Place Order</span>

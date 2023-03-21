@@ -41,6 +41,15 @@
                 </label>
                 <input type="text" name="email" class="mt-1 form-control profile-input" id="email" value="{{old('email',isset($user->email) ? $user->email : '')}}" placeholder="Fill Your Email" required>
               </div>
+              <div class="form-group my-3">
+                <label for="mobile_number">
+                  Mobile Number
+                  @error('mobile_number')
+                    <span style="color:red;font-size:13px;font-weight:bold;">{{ $message }}</span>
+                  @enderror
+                </label>
+                <input type="text" name="mobile_number" class="mt-1 form-control profile-input" id="mobile_number" value="{{old('mobile_number',isset($user->mobile_number) ? $user->mobile_number : '')}}" placeholder="Fill Your Phone Number" required>
+              </div>
               <button class="checkout">Save Changes</button>
             </form>
           </div>

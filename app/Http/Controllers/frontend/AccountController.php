@@ -55,6 +55,7 @@ class AccountController extends Controller
       $validator=Validator::make($input,[
         'name'=>['required','max:1000'],
         'email' => 'required|email',
+        'mobile_number' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10'],
       ]);
       if($validator->fails()){
         return redirect()->back()->withErrors($validator)->withInput();
@@ -142,6 +143,7 @@ class AccountController extends Controller
     }
 
     public function customizewithdata(Request $request) {
+      // dd('hehe');
       Session::put('selected_color', $request->selected_color);
       Session::put('price_per_product', $request->price_per_product);
       return redirect('/customize/'.$request->product_id);

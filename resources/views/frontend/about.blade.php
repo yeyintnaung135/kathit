@@ -158,7 +158,7 @@
                 <img src="{{ url('/images/directors/kathit.jpg') }}" alt="Kathit" class="">
               </div>
               <div class="col-7 col-lg-12 ">
-                <h4 class="name mt-0 mt-lg-3">Ka Thit</h4>
+                <h4 class="name mt-0 mt-lg-3">နှောင်းသွေး</h4>
                 <h4 class="position my-2">CEO / FOUNDER</h4>
                 <span>(Fashion Designer)</span>
               </div>
