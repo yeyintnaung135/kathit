@@ -53,11 +53,16 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
       if(is_numeric($data['email'])) {
+        $data['mobile_number'] = $data['email'];
         return Validator::make($data, [
           'name' => ['required', 'string', 'max:255'],
-          'email' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10', 'unique:users'],
+          'mobile_number' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10', 'unique:users'],
           'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        ]
+        , [
+            'mobile_number.unique' => 'This phone number has already been taken. ',
+          ]
+        );
       } else {
         return Validator::make($data, [
           'name' => ['required', 'string', 'max:255'],

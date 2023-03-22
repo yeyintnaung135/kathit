@@ -28,6 +28,11 @@
                               <strong>{{ $message }}</strong>
                           </span>
                       @enderror
+                      @error('mobile_number')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
                   </div>
 
                   {{-- <div class="mb-3">
@@ -71,6 +76,9 @@
 @endsection
 @push('styles')
   <style>
+    .invalid-feedback {
+      display: block !important;
+    }
     .login-photo {
       width: 180px;
       float: right;
